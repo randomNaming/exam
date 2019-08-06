@@ -16,12 +16,18 @@
         WHERE
         id=#{id}
     </select>
+    <select id="checkStudentLogin" resultType="com.xjw.exam.entity.Student">
+        SELECT id,name,password
+        FROM student
+        WHERE
+        id=#{id} AND password=#{password}
+    </select>
     <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.Student">
         INSERT INTO
         student(id,name,password)
         VALUES
-        (#{id},#{name},#{password})
+        (${id},#{name},#{password})
     </insert>
     <update id="updateStudent" parameterType="com.xjw.exam.entity.Student">
         UPDATE student

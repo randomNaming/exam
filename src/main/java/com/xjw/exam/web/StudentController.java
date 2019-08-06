@@ -2,36 +2,39 @@ package com.xjw.exam.web;
 
 import com.xjw.exam.entity.Student;
 import com.xjw.exam.service.StudentService;
+import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/superadmin")
 @CrossOrigin
 public class StudentController {
+
     @Autowired
     private StudentService studentService;
 
     @RequestMapping(value = "listStudent", method = RequestMethod.GET)
-    private Map<String, Object> listStudent(){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        List<Student> list = studentService.getStudentList();
-        modelMap.put("studentList", list);
-        return modelMap;
+    private JSONResult listStudent(){
+        return studentService.findList();
     }
 
     @RequestMapping(value = "getStudentById", method = RequestMethod.GET)
-    private Map<String, Object> getStudentById(Integer id){
+    private Map<String, Object> getStudentById(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         Student student = studentService.getStudentById(id);
         modelMap.put("student", student);
+        return modelMap;
+    }
+
+    @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
+    private Map<String, Object> checkLogin(Student student){
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        modelMap.put("success", studentService.checkStudentLogin(student));
         return modelMap;
     }
 
@@ -50,7 +53,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "removeStudent", method = RequestMethod.GET)
-    private Map<String, Object> removeStudent(Integer id){
+    private Map<String, Object> removeStudent(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", studentService.deleteStudnet(id));
         return modelMap;

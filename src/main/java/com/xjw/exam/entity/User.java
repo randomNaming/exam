@@ -1,5 +1,7 @@
 package com.xjw.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public abstract class User {
     // 编号
     private String id;
@@ -8,6 +10,7 @@ public abstract class User {
     private String name;
 
     // 密码
+    @JsonIgnore
     private String password;
 
     public void setId(String id){

@@ -1,9 +1,11 @@
 package com.xjw.exam.dao;
 
 import com.xjw.exam.entity.Student;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface StudentDao {
 
     /**
@@ -18,7 +20,9 @@ public interface StudentDao {
      * @param id
      * @return
      */
-    Student queryStudentById(int id);
+    Student queryStudentById(String id);
+
+    Student checkStudentLogin(Student student);
 
     /**
      * 插入学生登录信息
@@ -42,5 +46,5 @@ public interface StudentDao {
      * @param id
      * @return
      */
-    int deleteStudnet(int id);
+    int deleteStudnet(String id);
 }

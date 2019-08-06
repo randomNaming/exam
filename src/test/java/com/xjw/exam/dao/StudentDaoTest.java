@@ -28,14 +28,14 @@ public class StudentDaoTest {
 
     @Test
     public void queryStudentById() {
-        Student student = studentDao.queryStudentById(222);
+        Student student = studentDao.queryStudentById("222");
         assertEquals("admin", student.getName());
     }
 
     @Test
     public void insertStudent() {
         Student student = new Student();
-        student.setId(121);
+        student.setId("121");
         student.setName("test1");
         student.setPassword("123341");
         int result = studentDao.insertStudent(student);
@@ -45,7 +45,7 @@ public class StudentDaoTest {
     @Test
     public void updateStudent() {
         Student student = new Student();
-        student.setId(121);
+        student.setId("121");
         student.setName("guest");
         student.setPassword("123341");
         int result = studentDao.updateStudent(student);
@@ -54,7 +54,7 @@ public class StudentDaoTest {
 
     @Test
     public void deleteStudnet() {
-        int result = studentDao.deleteStudnet(121);
+        int result = studentDao.deleteStudnet("121");
         assertEquals(1,result);
     }
 }

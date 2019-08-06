@@ -47,9 +47,6 @@ public class JSONResult {
         this.status = status;
         this.msg = msg;
         this.data = data;
-        System.out.println(this.data);
-        System.out.println(this.msg);
-        System.out.println(this.status);
     }
 
     // 构造函数
