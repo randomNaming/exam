@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjw.exam.dao.TeacherDao">
+
+    <sql id="examTeacherNormal">
+        a.id AS "id",
+        a.name AS "name",
+        a.password AS "password"
+    </sql>
+    <select id="queryTeacher" resultType="com.xjw.exam.entity.Teacher">
+        SELECT
+        <include refid="examTeacherNormal" />
+        FROM teacher a
+        ORDER BY name
+        DESC
+    </select>
+    <select id="queryTeacherById" resultType="com.xjw.exam.entity.Teacher">
+        SELECT
+        <include refid="examTeacherNormal" />
+        FROM teacher a
+        WHERE
+        id=#{id}
+    </select>
+    <select id="checkTeacherLogin" resultType="com.xjw.exam.entity.Teacher">
+        SELECT
+        <include refid="examTeacherNormal" />
+        FROM teacher a
+        WHERE
+        id=#{id} AND password=#{password}
+    </select>
+    <insert id="insertTeacher" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.xjw.exam.entity.Teacher">
+        INSERT INTO
+        teacher(id,name,password)
+        VALUES
+        (#{id},#{name},#{password})
+    </insert>
+    <update id="updateTeacher" parameterType="com.xjw.exam.entity.Teacher">
+        UPDATE teacher
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteTeacher">
+        DELETE FROM
+        teacher
+        WHERE
+        id=#{id}
+    </delete>
+</mapper>

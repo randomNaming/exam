@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class StudentService {
@@ -71,7 +73,7 @@ public class StudentService {
     public boolean deleteStudnet(String id) {
         if(id != null){
             try {
-                int effectedNum = studentDao.deleteStudnet(id);
+                int effectedNum = studentDao.deleteStudent(id);
                 if(effectedNum > 0){
                     return true;
                 }else{
@@ -85,7 +87,16 @@ public class StudentService {
         }
     }
 
-    public Object checkStudentLogin(Student student) {
-        return true;
+    public Map<String, Object> checkStudentLogin(Student student) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        Student checkStudent = studentDao.checkStudentLogin(student);
+        if(checkStudent != null){
+            result.put("success", true);
+            result.put("msg", "验证通过！");
+        }else{
+            result.put("success", false);
+            result.put("msg", "用户名或密码错误！");
+        }
+        return result;
     }
 }

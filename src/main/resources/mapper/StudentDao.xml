@@ -37,7 +37,7 @@
         </set>
         WHERE id=#{id}
     </update>
-    <delete id="deleteStudnet">
+    <delete id="deleteStudent">
         DELETE FROM
         student
         WHERE

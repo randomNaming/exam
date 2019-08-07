@@ -20,9 +20,14 @@ public interface StudentDao {
      * @param id
      * @return
      */
-    Student queryStudentById(String id);
+    public Student queryStudentById(String id);
 
-    Student checkStudentLogin(Student student);
+    /**
+     * 查询登录信息
+     * @param student
+     * @return
+     */
+    public Student checkStudentLogin(Student student);
 
     /**
      * 插入学生登录信息
@@ -46,5 +51,5 @@ public interface StudentDao {
      * @param id
      * @return
      */
-    int deleteStudnet(String id);
+    int deleteStudent(String id);
 }
