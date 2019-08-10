@@ -4,14 +4,15 @@ import java.util.Date;
 
 public class QuestionSets {
 
+    // 编号
     private Integer id;
 
     private String setName;
 
     private String include;
-
+    // 创建时间
     private Date createTime;
-
+    // 作者
     private String author;
 
     public Integer getId() {

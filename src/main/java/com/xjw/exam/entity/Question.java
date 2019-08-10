@@ -4,16 +4,22 @@ import java.util.Date;
 
 public class Question {
 
+    // 问题编号
     private Integer id;
 
+    // 题目内容
     private String content;
 
+    // 题目答案
     private String answer;
 
+    // 题目分数
     private Integer score;
 
+    // 教师编号
     private String teacherId;
 
+    // 创建时间
     private Date createTime;
 
     private String choice;

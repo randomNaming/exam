@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Stugrade {
 
+    // 学生编号
     private String stuId;
 
     private Integer setId;
