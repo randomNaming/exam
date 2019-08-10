@@ -2,6 +2,11 @@ package com.xjw.exam.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * 用户
+ * @author SHXjw - S.H.Xjw@outlook.com
+ * @version 20190810
+ */
 public abstract class User {
     // 编号
     private String id;

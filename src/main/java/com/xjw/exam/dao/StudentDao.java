@@ -5,22 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 学生DAO接口
+ * @author SHXjw
+ * @version 20190910
+ */
 @Repository
-public interface StudentDao {
-
-    /**
-     * 列出学生登录表
-     *
-     * @return
-     */
-    List<Student> queryStudent();
-
-    /**
-     * 根据学生id查询学生登录信息
-     * @param id
-     * @return
-     */
-    public Student queryStudentById(String id);
+public interface StudentDao extends CurdDao<Student>{
 
     /**
      * 查询登录信息
@@ -28,28 +19,4 @@ public interface StudentDao {
      * @return
      */
     public Student checkStudentLogin(Student student);
-
-    /**
-     * 插入学生登录信息
-     *
-     * @param student
-     * @return
-     */
-    int insertStudent(Student student);
-
-    /**
-     * 更新学生登录信息
-     *
-     * @param student
-     * @return
-     */
-    int updateStudent(Student student);
-
-    /**
-     * 删除学生登录信息
-     *
-     * @param id
-     * @return
-     */
-    int deleteStudent(String id);
 }

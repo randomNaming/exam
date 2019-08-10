@@ -22,13 +22,13 @@ public class StudentDaoTest {
     @Test
     @Ignore
     public void queryStudent() {
-        List<Student> studentList = studentDao.queryStudent();
+        List<Student> studentList = studentDao.findAllList();
         assertEquals(2,studentList.size());
     }
 
     @Test
     public void queryStudentById() {
-        Student student = studentDao.queryStudentById("222");
+        Student student = studentDao.get("222");
         assertEquals("admin", student.getName());
     }
 
@@ -38,7 +38,7 @@ public class StudentDaoTest {
         student.setId("121");
         student.setName("test1");
         student.setPassword("123341");
-        int result = studentDao.insertStudent(student);
+        int result = studentDao.insert(student);
         assertEquals(1,result);
     }
 
@@ -48,14 +48,14 @@ public class StudentDaoTest {
         student.setId("121");
         student.setName("guest");
         student.setPassword("123341");
-        int result = studentDao.updateStudent(student);
+        int result = studentDao.update(student);
         assertEquals(1,result);
     }
 
     @Test
     @Ignore
     public void deleteStudnet() {
-        int result = studentDao.deleteStudent("121");
+        int result = studentDao.delete("121");
         assertEquals(1,result);
     }
 }

@@ -2,6 +2,11 @@ package com.xjw.exam.entity;
 
 import java.util.Date;
 
+/**
+ * 登录记录
+ * @author SHXjw - S.H.Xjw@outlook.com
+ * @version 20190810
+ */
 public class LoginHistory {
 
     // 学号

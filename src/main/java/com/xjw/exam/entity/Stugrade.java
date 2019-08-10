@@ -2,21 +2,28 @@ package com.xjw.exam.entity;
 
 import java.util.Date;
 
+/**
+ * 成绩结果
+ * @author SHXjw - S.H.Xjw@outlook.com
+ * @version 20190810
+ */
 public class Stugrade {
 
     // 学生编号
     private String stuId;
 
+    // 试卷属性编号
     private Integer setId;
 
+    // 正确题数
     private Integer rightCount;
-
+    // 错误题数
     private Integer wrongCount;
-
+    // 总分
     private Integer total;
-
+    // 考试开始时间
     private Date startTime;
-
+    // 考试结束时间
     private Date finishTime;
 
     public String getStuId() {

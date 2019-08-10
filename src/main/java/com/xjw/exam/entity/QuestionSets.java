@@ -2,6 +2,11 @@ package com.xjw.exam.entity;
 
 import java.util.Date;
 
+/**
+ * 问题属性
+ * @author SHXjw - S.H.Xjw@outlook.com
+ * @version 20190810
+ */
 public class QuestionSets {
 
     // 编号

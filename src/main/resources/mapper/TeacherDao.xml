@@ -10,14 +10,14 @@
         a.name AS "name",
         a.password AS "password"
     </sql>
-    <select id="queryTeacher" resultType="com.xjw.exam.entity.Teacher">
+    <select id="findAllList" resultType="com.xjw.exam.entity.Teacher">
         SELECT
         <include refid="examTeacherNormal" />
         FROM teacher a
         ORDER BY name
         DESC
     </select>
-    <select id="queryTeacherById" resultType="com.xjw.exam.entity.Teacher">
+    <select id="get" resultType="com.xjw.exam.entity.Teacher">
         SELECT
         <include refid="examTeacherNormal" />
         FROM teacher a
@@ -31,14 +31,14 @@
         WHERE
         id=#{id} AND password=#{password}
     </select>
-    <insert id="insertTeacher" useGeneratedKeys="true" keyProperty="id"
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.Teacher">
         INSERT INTO
         teacher(id,name,password)
         VALUES
         (#{id},#{name},#{password})
     </insert>
-    <update id="updateTeacher" parameterType="com.xjw.exam.entity.Teacher">
+    <update id="update" parameterType="com.xjw.exam.entity.Teacher">
         UPDATE teacher
         <set>
             <if test="name != null">name=#{name},</if>
@@ -46,7 +46,7 @@
         </set>
         WHERE id=#{id}
     </update>
-    <delete id="deleteTeacher">
+    <delete id="delete">
         DELETE FROM
         teacher
         WHERE

@@ -2,18 +2,23 @@ package com.xjw.exam.entity;
 
 import java.util.Date;
 
+/**
+ * 考试记录
+ * @author SHXjw - S.H.Xjw@outlook.com
+ * @version 20190810
+ */
 public class TestHistory {
-
+    // 学生学号
     private String stuId;
-
+    //
     private Integer qSet;
-
+    // 问题编号
     private Integer qId;
-
+    // 学生选择
     private String stuChoise;
-
+    // 学生分数
     private Integer stuScore;
-
+    // 考试时长
     private Date testTime;
 
     public String getStuId() {

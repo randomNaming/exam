@@ -16,7 +16,7 @@ public class TeacherService {
     private TeacherDao teacherDao;
 
     public Teacher getTeacherById(String id) {
-        return teacherDao.queryTeacherById(id);
+        return teacherDao.get(id);
     }
 
     public Map<String, Object> checkTeacherLogin(Teacher teacher) {
@@ -36,7 +36,7 @@ public class TeacherService {
     public boolean addTeacher(Teacher teacher) {
         if(teacher.getName()!=null && !"".equals(teacher.getName())){
             try {
-                int effectedNum = teacherDao.insertTeacher(teacher);
+                int effectedNum = teacherDao.insert(teacher);
                 if(effectedNum > 0){
                     return true;
                 }else{

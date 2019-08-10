@@ -17,8 +17,12 @@ public class StudentService {
     @Autowired
     private StudentDao studentDao;
 
+    /**
+     * 查询所有学生列表
+     * @return
+     */
     public List<Student> getStudentList() {
-        return studentDao.queryStudent();
+        return studentDao.findAllList();
     }
 
     public JSONResult findList(){
@@ -30,15 +34,20 @@ public class StudentService {
         }
     }
 
+    /**
+     * 根据id查询学生信息
+     * @param id
+     * @return
+     */
     public Student getStudentById(String id) {
-        return studentDao.queryStudentById(id);
+        return studentDao.get(id);
     }
 
     @Transactional
     public boolean addStudent(Student student) {
         if(student.getName()!=null && !"".equals(student.getName())){
             try {
-                int effectedNum = studentDao.insertStudent(student);
+                int effectedNum = studentDao.insert(student);
                 if(effectedNum > 0){
                     return true;
                 }else{
@@ -52,11 +61,15 @@ public class StudentService {
         }
     }
 
-
+    /**
+     * 更新学生注册信息
+     * @param student
+     * @return
+     */
     public boolean modifyStudent(Student student) {
         if(student.getId()!=null ){
             try {
-                int effectedNum = studentDao.updateStudent(student);
+                int effectedNum = studentDao.update(student);
                 if(effectedNum > 0){
                     return true;
                 }else{
@@ -70,10 +83,15 @@ public class StudentService {
         }
     }
 
+    /**
+     * 删除学生注册信息
+     * @param id
+     * @return
+     */
     public boolean deleteStudnet(String id) {
         if(id != null){
             try {
-                int effectedNum = studentDao.deleteStudent(id);
+                int effectedNum = studentDao.delete(id);
                 if(effectedNum > 0){
                     return true;
                 }else{

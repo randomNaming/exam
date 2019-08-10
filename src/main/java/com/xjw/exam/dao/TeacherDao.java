@@ -5,22 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 教师DAO接口
+ * @author SHXjw
+ * @version 20190910
+ */
 @Repository
-public interface TeacherDao {
-
-    /**
-     * 列出教师登录表
-     *
-     * @return
-     */
-    List<Teacher> queryTeacher();
-
-    /**
-     * 根据教师id查询教师登录信息
-     * @param id
-     * @return
-     */
-    Teacher queryTeacherById(String id);
+public interface TeacherDao extends CurdDao<Teacher>{
 
     /**
      * 查询教师信息
@@ -28,28 +19,4 @@ public interface TeacherDao {
      * @return
      */
     Teacher checkTeacherLogin(Teacher teacher);
-
-    /**
-     * 插入教师登录信息
-     *
-     * @param teacher
-     * @return
-     */
-    public int insertTeacher(Teacher teacher);
-
-    /**
-     * 更新教师登录信息
-     *
-     * @param teacher
-     * @return
-     */
-    public int updateTeacher(Teacher teacher);
-
-    /**
-     * 删除教师登录信息
-     *
-     * @param id
-     * @return
-     */
-    public int deleteTeacher(String id);
 }
