@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjw.exam.dao.QuestionDao">
+
+    <sql id="normal">
+        a.id AS "id",
+        a.content AS "content",
+        a.answer AS "answer",
+        a.score AS "score",
+        a.teacher_id AS "teacherId",
+        a.create_time AS "createTime",
+        a.choice AS "choice"
+    </sql>
+    <select id="findAllList" resultType="com.xjw.exam.entity.Question">
+        SELECT
+        <include refid="normal" />
+        FROM question a
+        ORDER BY name
+        DESC
+    </select>
+    <select id="get" resultType="com.xjw.exam.entity.Question">
+        SELECT
+        <include refid="normal" />
+        FROM question a
+        WHERE
+        id=#{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.xjw.exam.entity.Question">
+        INSERT INTO
+        question(id,name,password)
+        VALUES
+        (#{id},#{name},#{password})
+    </insert>
+    <update id="update" parameterType="com.xjw.exam.entity.Question">
+        UPDATE question
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM
+        question
+        WHERE
+        id=#{id}
+    </delete>
+</mapper>

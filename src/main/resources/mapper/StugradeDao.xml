@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjw.exam.dao.StugradeDao">
+
+    <sql id="normal">
+        a.stu_id AS "stuId",
+        a.set_id AS "setId",
+        a.right_count AS "rightCount",
+        a.wrong_count AS "wrongCount",
+        a.total AS "total",
+        a.start_time AS "startTime",
+        a.finish_time AS "finishTime"
+    </sql>
+    <select id="findAllList" resultType="com.xjw.exam.entity.Stugrade">
+        SELECT
+        <include refid="normal" />
+        FROM stugrade a
+        ORDER BY name
+        DESC
+    </select>
+    <select id="get" resultType="com.xjw.exam.entity.Stugrade">
+        SELECT
+        <include refid="normal" />
+        FROM stugrade a
+        WHERE
+        id=#{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.xjw.exam.entity.Stugrade">
+        INSERT INTO
+        stugrade(id,name,password)
+        VALUES
+        (#{id},#{name},#{password})
+    </insert>
+    <update id="update" parameterType="com.xjw.exam.entity.Stugrade">
+        UPDATE stugrade
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM
+        stugrade
+        WHERE
+        id=#{id}
+    </delete>
+</mapper>

@@ -10,7 +10,7 @@ import java.util.Date;
 public class LoginHistory {
 
     // 学号
-    private String stuid;
+    private String stuId;
 
     // 权限
     private String access;
@@ -18,12 +18,12 @@ public class LoginHistory {
     // 登陆时间
     private Date loginTime;
 
-    public String getStuid() {
-        return stuid;
+    public String getStuId() {
+        return stuId;
     }
 
-    public void setStuid(String stuid) {
-        this.stuid = stuid;
+    public void setStuId(String stuId) {
+        this.stuId = stuId;
     }
 
     public String getAccess() {

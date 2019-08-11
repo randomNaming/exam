@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xjw.exam.dao.TestHistoryDao">
+
+    <sql id="normal">
+        a.stu_id AS "stuId",
+        a.q_set AS "qSet",
+        a.q_id AS "qId",
+        a.stu_choise AS "stuChoise",
+        a.stu_score AS "stuScore",
+        a.test_time AS "testTime"
+    </sql>
+    <select id="findAllList" resultType="com.xjw.exam.entity.TestHistory">
+        SELECT
+        <include refid="normal" />
+        FROM test_history a
+        ORDER BY name
+        DESC
+    </select>
+    <select id="get" resultType="com.xjw.exam.entity.TestHistory">
+        SELECT
+        <include refid="normal" />
+        FROM test_history a
+        WHERE
+        id=#{id}
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            keyColumn="id" parameterType="com.xjw.exam.entity.TestHistory">
+        INSERT INTO
+        test_history(id,name,password)
+        VALUES
+        (#{id},#{name},#{password})
+    </insert>
+    <update id="update" parameterType="com.xjw.exam.entity.TestHistory">
+        UPDATE test_history
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="password != null">password=#{password}</if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM
+        test_history
+        WHERE
+        id=#{id}
+    </delete>
+</mapper>
