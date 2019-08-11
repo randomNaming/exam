@@ -66,7 +66,8 @@ public class StudentController {
      */
     @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
     private Map<String, Object> checkLogin(Student student){
-        System.out.println(student.getPassword());
+        System.out.println("id = " + student.getId());
+        System.out.println("password = " + student.getPassword());
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap = studentService.checkStudentLogin(student);
         System.out.println(modelMap);
