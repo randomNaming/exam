@@ -1,5 +1,7 @@
 package com.xjw.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -15,8 +17,12 @@ public class QuestionSets {
     private String setName;
 
     private String include;
+
     // 创建时间
+    // timezone根据时区来计算，默认GMT+8
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date createTime;
+
     // 作者
     private String author;
 

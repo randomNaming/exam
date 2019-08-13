@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/student")
-@CrossOrigin
+@CrossOrigin  // 跨域注解
 public class StudentController {
 
     @Autowired
@@ -20,7 +20,6 @@ public class StudentController {
 
     /**
      * 所有学生列表
-     * @return
      */
     @RequestMapping(value = "listStudent", method = RequestMethod.GET)
     private JSONResult listStudent(){
@@ -62,7 +61,6 @@ public class StudentController {
     /**
      * 检查登录
      * @param student
-     * @return
      */
     @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
     private Map<String, Object> checkLogin(Student student){
@@ -74,6 +72,10 @@ public class StudentController {
         return modelMap;
     }
 
+    /**
+     * 添加学生
+     * @param student
+     */
     @RequestMapping(value = "addStudent", method = RequestMethod.POST)
     private Map<String, Object> addStudent(Student student){
         Map<String, Object> modelMap = new HashMap<String, Object>();
@@ -81,6 +83,10 @@ public class StudentController {
         return modelMap;
     }
 
+    /**
+     * 修改学生数据
+     * @param student
+     */
     @RequestMapping(value = "modifyStudent", method = RequestMethod.POST)
     private Map<String, Object> modifyStudent(Student student){
         Map<String, Object> modelMap = new HashMap<String, Object>();
@@ -88,6 +94,10 @@ public class StudentController {
         return modelMap;
     }
 
+    /**
+     * 删除学生
+     * @param id
+     */
     @RequestMapping(value = "removeStudent", method = RequestMethod.GET)
     private Map<String, Object> removeStudent(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
