@@ -31,9 +31,9 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.Question">
         INSERT INTO
-        question(id,name,password)
+        question(id,content,answer,score,teacher_id,create_time,choice)
         VALUES
-        (#{id},#{name},#{password})
+        (#{id},#{content},#{answer},#{score},#{teacherId},#{createTime},#{choice})
     </insert>
     <update id="update" parameterType="com.xjw.exam.entity.Question">
         UPDATE question

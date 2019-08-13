@@ -38,6 +38,9 @@ public class JSONResult {
     @JsonIgnore
     private String ok;
 
+    // 執行操作成功
+    private boolean success;
+
     public JSONResult() {
 
     }
@@ -54,6 +57,7 @@ public class JSONResult {
         this.status = 200;
         this.msg = "OK";
         this.data = data;
+        this.success = true;
     }
 
     public static JSONResult build(Integer status, String msg, Object data) {
@@ -200,4 +204,11 @@ public class JSONResult {
         this.ok = ok;
     }
 
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 }
