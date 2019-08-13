@@ -16,7 +16,7 @@
         SELECT
         <include refid="normal" />
         FROM question_sets a
-        ORDER BY name
+        ORDER BY create_time
         DESC
     </select>
     <select id="get" resultType="com.xjw.exam.entity.QuestionSets">

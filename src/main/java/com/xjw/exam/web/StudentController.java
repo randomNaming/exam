@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/student")
-@CrossOrigin
+@CrossOrigin  // 跨域注解
 public class StudentController {
 
     @Autowired
