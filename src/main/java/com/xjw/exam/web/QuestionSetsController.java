@@ -19,6 +19,10 @@ public class QuestionSetsController {
     @Autowired
     private QuestionSetsService questionSetsService;
 
+    /**
+     * 查询所有试卷
+     * @return
+     */
     @RequestMapping(value = "findAllList", method = RequestMethod.GET)
     public List<QuestionSets> findAllList(){
         return questionSetsService.findAllList();

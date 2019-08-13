@@ -65,6 +65,10 @@ public class TeacherController {
         return modelMap;
     }
 
+    /**
+     * 添加教师
+     * @param teacher
+     */
     @RequestMapping(value = "addTeacher", method = RequestMethod.POST)
     private Map<String, Object> addTeacher(Teacher teacher){
         Map<String, Object> modelMap = new HashMap<String, Object>();
