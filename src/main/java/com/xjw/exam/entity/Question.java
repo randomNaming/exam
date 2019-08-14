@@ -1,5 +1,7 @@
 package com.xjw.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -24,7 +26,12 @@ public class Question {
     // 教师编号
     private String teacherId;
 
+    // 教师姓名
+    private String teacherName;
+
     // 创建时间
+    // timezone根据时区来计算，默认GMT+8
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date createTime;
 
     private String choice;
@@ -83,5 +90,13 @@ public class Question {
 
     public void setChoice(String choice) {
         this.choice = choice;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 }

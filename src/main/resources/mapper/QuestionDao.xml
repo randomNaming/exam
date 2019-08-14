@@ -12,12 +12,17 @@
         a.score AS "score",
         a.teacher_id AS "teacherId",
         a.create_time AS "createTime",
-        a.choice AS "choice"
+        a.choice AS "choice",
+        t.name AS "teacherName"
+    </sql>
+    <sql id="leftJoinTeacher">
+        JOIN teacher t ON t.id = a.teacher_id
     </sql>
     <select id="findAllList" resultType="com.xjw.exam.entity.Question">
         SELECT
         <include refid="normal" />
         FROM question a
+        <include refid="leftJoinTeacher" />
         ORDER BY create_time
         DESC
     </select>
@@ -25,6 +30,7 @@
         SELECT
         <include refid="normal" />
         FROM question a
+        <include refid="leftJoinTeacher" />
         WHERE
         id=#{id}
     </select>

@@ -1,6 +1,8 @@
 package com.xjw.exam.service;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xjw.exam.dao.QuestionDao;
 import com.xjw.exam.entity.Question;
 import com.xjw.exam.utils.JSONResult;
@@ -18,6 +20,13 @@ public class QuestionService {
 
     public List<Question> findAllList() {
         return questionDao.findAllList();
+    }
+
+    public PageInfo<Question> findByPage(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Question> list = questionDao.findAllList();
+        PageInfo<Question> page = new PageInfo<Question>(list);
+        return page;
     }
 
     public JSONResult insert(Question question) {

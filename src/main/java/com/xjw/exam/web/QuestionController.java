@@ -1,5 +1,6 @@
 package com.xjw.exam.web;
 
+import com.github.pagehelper.PageInfo;
 import com.xjw.exam.entity.Question;
 import com.xjw.exam.service.QuestionService;
 import com.xjw.exam.utils.JSONResult;
@@ -9,7 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController     // RestController = @Controller + @ResponBody
@@ -21,8 +26,22 @@ public class QuestionController {
     private QuestionService questionService;
 
     @RequestMapping(value = "findAllList", method = RequestMethod.GET)
-    public List<Question> findAllList(){
-        return questionService.findAllList();
+    public Map<String, Object> findAllList(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = new HashMap<String, Object>();
+        String strNum = request.getParameter("pageNum");
+        String strSize = request.getParameter("pageSize");
+        System.out.println("page == >" + strNum +" "  + strSize);
+        if(strNum != null && strSize != null) {
+            int pageNum = Integer.parseInt(strNum);
+            int pageSize = Integer.parseInt(strSize);
+            System.out.println("page == >" + pageNum +"  --- "  + pageSize);
+            PageInfo<Question> findpage = questionService.findByPage(pageNum, pageSize);
+            result.put("data",findpage);
+        }else{
+            List<Question> findList = questionService.findAllList();
+            result.put("data",findList);
+        }
+        return result;
     }
 
     @RequestMapping(value = "addQuestion", method = RequestMethod.POST)
