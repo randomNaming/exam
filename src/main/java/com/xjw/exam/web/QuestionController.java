@@ -38,6 +38,7 @@ public class QuestionController {
             PageInfo<Question> findpage = questionService.findByPage(pageNum, pageSize);
             result.put("data",findpage);
         }else{
+            System.out.println("else{} === ");
             List<Question> findList = questionService.findAllList();
             result.put("data",findList);
         }

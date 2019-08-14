@@ -16,7 +16,7 @@
         t.name AS "teacherName"
     </sql>
     <sql id="leftJoinTeacher">
-        JOIN teacher t ON t.id = a.teacher_id
+        LEFT JOIN teacher t ON t.id = a.teacher_id
     </sql>
     <select id="findAllList" resultType="com.xjw.exam.entity.Question">
         SELECT
