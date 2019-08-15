@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/teacher/paperQuestionSets")
-//@CrossOrigin  // 跨域注解
+//@CrossOrigin  局部跨域注解 - if you need part of @Intefaces, you can disable it.
 public class QuestionSetsController {
 
     @Autowired

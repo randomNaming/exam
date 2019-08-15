@@ -27,8 +27,11 @@ public class CORSFilter implements Filter {
         /**
          * 设置允许跨域的配置
          */
-        // 这里填写你允许进行跨域的主机ip（正式上线时可以动态配置具体允许的域名和IP）
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        String origin = request.getHeader("Origin");
+        if (!org.springframework.util.StringUtils.isEmpty(origin)){
+            // 这里填写你允许进行跨域的主机ip（正式上线时可以动态配置具体允许的域名和IP）
+            response.setHeader("Access-Control-Allow-Origin", origin);
+        }
         // 允许的访问方法
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         // 用于 CORS 相关配置的缓存

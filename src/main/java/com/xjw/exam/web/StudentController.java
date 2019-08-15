@@ -12,11 +12,17 @@ import java.util.Map;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/student")
-@CrossOrigin  // 跨域注解
+//@CrossOrigin  局部跨域注解 - if you need part of @Intefaces, you can disable it.
 public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @RequestMapping(value = "getCookies", method = RequestMethod.GET)
+    public JSONResult getCookies(@CookieValue(value = "cookie1")String cookie1){
+        System.out.println("TestCookie()===================");
+        return JSONResult.errorMsg("getCookie" + cookie1);
+    }
 
     /**
      * 所有学生列表
