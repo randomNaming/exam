@@ -1,4 +1,4 @@
-package com.xjw.exam.config.common;
+package com.xjw.exam.config.common.filter;
 
 import org.springframework.context.annotation.Configuration;
 

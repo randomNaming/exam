@@ -4,8 +4,12 @@ import com.xjw.exam.entity.Student;
 import com.xjw.exam.service.StudentService;
 import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +22,17 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value = "getCookies", method = RequestMethod.GET)
-    public JSONResult getCookies(@CookieValue(value = "cookie1")String cookie1){
-        System.out.println("TestCookie()===================");
-        return JSONResult.errorMsg("getCookie" + cookie1);
+    @RequestMapping(value = "getInfo", method = RequestMethod.GET)
+    public JSONResult getCookies(HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        if(session.getAttribute("user")!=null){
+            Student student = (Student)session.getAttribute("user");
+            return new JSONResult(200,"ok!",student);
+        }else{
+
+            System.out.println("TestCookie()===================" + (Student)session.getAttribute("user"));
+            return JSONResult.errorMsg("getCookie" + request.getSession());
+        }
     }
 
     /**
@@ -44,6 +55,7 @@ public class StudentController {
         modelMap.put("student", student);
         return modelMap;
     }
+
 
     /**
      * 学号查重
@@ -68,12 +80,19 @@ public class StudentController {
      * 检查登录
      * @param student
      */
-    @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
-    private Map<String, Object> checkLogin(Student student){
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    private Map<String, Object> login(HttpServletRequest request, HttpServletResponse response, Student student){
         System.out.println("id = " + student.getId());
-        //ystem.out.println("password = " + student.getPassword());
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap = studentService.checkStudentLogin(student);
+        HttpSession session = request.getSession();
+
+        Student user = studentService.checkStudentLogin(student);
+        if (user != null){
+            session.setAttribute("user", user);
+            modelMap.put("msg","登錄成功！");
+            modelMap.put("success", true);
+            System.out.println("session ---> " + session.getId());
+        }
         System.out.println(modelMap);
         return modelMap;
     }

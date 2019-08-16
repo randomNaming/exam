@@ -105,16 +105,8 @@ public class StudentService {
         }
     }
 
-    public Map<String, Object> checkStudentLogin(Student student) {
-        Map<String, Object> result = new HashMap<String, Object>();
+    public Student checkStudentLogin(Student student) {
         Student checkStudent = studentDao.checkStudentLogin(student);
-        if(checkStudent != null){
-            result.put("success", true);
-            result.put("msg", "验证通过！");
-        }else{
-            result.put("success", false);
-            result.put("msg", "用户名或密码错误！");
-        }
-        return result;
+        return checkStudent;
     }
 }

@@ -50,6 +50,7 @@ public class JSONResult {
         this.status = status;
         this.msg = msg;
         this.data = data;
+        this.success = (status == 200)?true:false;
     }
 
     // 构造函数
