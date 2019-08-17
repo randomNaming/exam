@@ -1,6 +1,6 @@
 package com.xjw.exam.config.common.filter;
 
-import org.springframework.util.StringUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -16,19 +16,19 @@ public class SessionFilter implements Filter {
     String NO_LOGIN = "未登錄";
 
     // 白名單
-    String[] includeURLs = new String[]{"/student/login","register"};
+    String[] includeURLs = new String[]{"/exam/student/login","/exam/teacher/login","/exam/login"};
 
-//    int int1= 1;
-//    int int2 = 2;
-//    int int3 = 3;
+    // 会话日志
+    Logger sessionInitLog = Logger.getLogger(SessionFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        sessionInitLog.info("会话拦截器 >>>>>>>>>>>>>>>>>>>>>> 启动");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
 
@@ -37,18 +37,22 @@ public class SessionFilter implements Filter {
 
         String uri = request.getRequestURI();
 
-        System.out.println("filter url:" + uri);
+        // 调试作用：监测是否要过滤或排除
+        sessionInitLog.info("Filter URL >>>>>> " + uri);
 
         boolean needFilter = isNeedFilter(uri);
 
         if(!needFilter){
             filterChain.doFilter(servletRequest, servletResponse);
         }else{
+
+            sessionInitLog.info("this session: " + session.getId());
+
             if(session!=null && session.getAttribute("user")!=null){
                 filterChain.doFilter(servletRequest,servletResponse);
             }else{
 
-                System.out.println("應當做重定向了！");
+                sessionInitLog.info("@@@@@@@@@@@@@ 应当做重定向了！！！");
 
                 return;
             }

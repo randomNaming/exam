@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/teacher")
-@CrossOrigin
+//@CrossOrigin
 public class TeacherController {
 
     @Autowired
@@ -56,12 +56,13 @@ public class TeacherController {
      * @param teacher
      * @return
      */
-    @RequestMapping(value = "checkLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     private Map<String, Object> checkLogin(Teacher teacher){
         System.out.println(teacher.getPassword());
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        modelMap = teacherService.checkTeacherLogin(teacher);
+        Teacher tea = teacherService.checkTeacherLogin(teacher);
         System.out.println(modelMap);
+        modelMap.put("data", tea);
         return modelMap;
     }
 

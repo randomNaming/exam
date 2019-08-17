@@ -7,4 +7,17 @@ package com.xjw.exam.entity;
  */
 public class Teacher extends User{
 
+    public Teacher(){
+
+    }
+
+    /*
+     * 构造函数
+     * @describe 为验证登录做准备
+     */
+    public Teacher(String id, String password){
+        this.setId(id);
+        this.setPassword(password);
+    }
+
 }

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author SHXjw - S.H.Xjw@outlook.com
  * @version 20190810
  */
-public abstract class User {
+public class User {
     // 编号
     private String id;
 

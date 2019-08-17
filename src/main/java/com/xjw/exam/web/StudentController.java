@@ -39,7 +39,7 @@ public class StudentController {
      * 所有学生列表
      */
     @RequestMapping(value = "listStudent", method = RequestMethod.GET)
-    private JSONResult listStudent(){
+    public JSONResult listStudent(){
         return studentService.findList();
     }
 
@@ -49,7 +49,7 @@ public class StudentController {
      * @return 学生信息
      */
     @RequestMapping(value = "getStudentById", method = RequestMethod.GET)
-    private Map<String, Object> getStudentById(String id){
+    public Map<String, Object> getStudentById(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         Student student = studentService.getStudentById(id);
         modelMap.put("student", student);
@@ -63,7 +63,7 @@ public class StudentController {
      * @return success 0-重复 1-新用户
      */
     @RequestMapping(value = "checkById", method = RequestMethod.GET)
-    private Map<String, Object> checkById(String id){
+    public Map<String, Object> checkById(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         Student student = studentService.getStudentById(id);
         if (student != null){
@@ -81,7 +81,7 @@ public class StudentController {
      * @param student
      */
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    private Map<String, Object> login(HttpServletRequest request, HttpServletResponse response, Student student){
+    public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response, Student student){
         System.out.println("id = " + student.getId());
         Map<String, Object> modelMap = new HashMap<String, Object>();
         HttpSession session = request.getSession();
@@ -92,6 +92,9 @@ public class StudentController {
             modelMap.put("msg","登錄成功！");
             modelMap.put("success", true);
             System.out.println("session ---> " + session.getId());
+        }else{
+            modelMap.put("msg","账号或密码错误！");
+            modelMap.put("success", false);
         }
         System.out.println(modelMap);
         return modelMap;
@@ -102,7 +105,7 @@ public class StudentController {
      * @param student
      */
     @RequestMapping(value = "addStudent", method = RequestMethod.POST)
-    private Map<String, Object> addStudent(Student student){
+    public Map<String, Object> addStudent(Student student){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", studentService.addStudent(student));
         return modelMap;
@@ -113,7 +116,7 @@ public class StudentController {
      * @param student
      */
     @RequestMapping(value = "modifyStudent", method = RequestMethod.POST)
-    private Map<String, Object> modifyStudent(Student student){
+    public Map<String, Object> modifyStudent(Student student){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", studentService.modifyStudent(student));
         return modelMap;
@@ -124,7 +127,7 @@ public class StudentController {
      * @param id
      */
     @RequestMapping(value = "removeStudent", method = RequestMethod.GET)
-    private Map<String, Object> removeStudent(String id){
+    public Map<String, Object> removeStudent(String id){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         modelMap.put("success", studentService.deleteStudnet(id));
         return modelMap;

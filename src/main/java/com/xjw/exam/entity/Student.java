@@ -6,4 +6,17 @@ package com.xjw.exam.entity;
  * @version 20190810
  */
 public class Student extends User{
+
+    public Student(){
+
+    }
+
+    /*
+     * 构造函数
+     * @describe 为验证登录做准备
+     */
+    public Student(String id, String password){
+        this.setId(id);
+        this.setPassword(password);
+    }
 }

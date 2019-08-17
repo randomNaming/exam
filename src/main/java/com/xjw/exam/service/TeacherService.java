@@ -19,17 +19,11 @@ public class TeacherService {
         return teacherDao.get(id);
     }
 
-    public Map<String, Object> checkTeacherLogin(Teacher teacher) {
+    public Teacher checkTeacherLogin(Teacher teacher) {
         Map<String, Object> result = new HashMap<String, Object>();
         Teacher checkTeacher = teacherDao.checkTeacherLogin(teacher);
-        if(checkTeacher != null){
-            result.put("success", true);
-            result.put("msg", "验证通过！");
-        }else{
-            result.put("success", false);
-            result.put("msg", "用户名或密码错误！");
-        }
-        return result;
+
+        return checkTeacher;
     }
 
     @Transactional

@@ -1,6 +1,6 @@
 package com.xjw.exam.config.common.filter;
 
-import org.springframework.context.annotation.Configuration;
+import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -8,14 +8,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//拦截器添加跨域支持（如果是web.xml配置拦截器，请将@component删除）
+/**
+ * 拦截器添加跨域支持
+ *
+ * @describe 如果是web.xml配置拦截器，请将@component删除
+ *
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-16
+ */
 //@Component
 //@Configuration
 @WebFilter(filterName = "CORSFilter", urlPatterns = "/*")
 public class CORSFilter implements Filter {
+
+    Logger corsLogger = Logger.getLogger(CORSFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("=============== 跨域拦截器 执行 =================");
+        corsLogger.info("跨域拦截器 >>>>>>>>>>>>>>>>>>>>>>>>>>>> 启动");
     }
 
     @Override
@@ -29,7 +39,7 @@ public class CORSFilter implements Filter {
          */
         String origin = request.getHeader("Origin");
         if (!org.springframework.util.StringUtils.isEmpty(origin)){
-            // 这里填写你允许进行跨域的主机ip（正式上线时可以动态配置具体允许的域名和IP）
+            // 这里填写你允许进行跨域的主机ip（正式上线时可以动态配置具体允许的域名和IP - 目前允许所有跨域）
             response.setHeader("Access-Control-Allow-Origin", origin);
         }
         // 允许的访问方法
@@ -40,6 +50,8 @@ public class CORSFilter implements Filter {
                 "Authentication, Authorization, content-type, Accept, x-requested-with, Cache-Control");
         // 是否支持cookie跨域
         response.setHeader("Access-Control-Allow-Credentials","true");
+
+        // 交付下一个拦截器
         filterChain.doFilter(servletRequest, servletResponse);
 
     }

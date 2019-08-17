@@ -21,7 +21,7 @@ public class ExamApplication {
 
         bean.addUrlPatterns("/*");
         bean.setFilter(new CORSFilter());
-        bean.setOrder(0);
+        bean.setOrder(1);
 
         return bean;
     }
@@ -32,7 +32,7 @@ public class ExamApplication {
 
         bean.addUrlPatterns("/*");
         bean.setFilter(new SessionFilter());
-        bean.setOrder(1);
+        bean.setOrder(2);
 
         return bean;
     }
