@@ -26,6 +26,15 @@
         ORDER BY create_time
         DESC
     </select>
+    <select id="selectByIdSet" resultType="com.xjw.exam.entity.Question">
+        SELECT
+        <include refid="normal" />
+        from question a
+        WHERE id IN
+        <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
     <select id="get" resultType="com.xjw.exam.entity.Question">
         SELECT
         <include refid="normal" />

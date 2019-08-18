@@ -20,9 +20,7 @@ public class TeacherService {
     }
 
     public Teacher checkTeacherLogin(Teacher teacher) {
-        Map<String, Object> result = new HashMap<String, Object>();
         Teacher checkTeacher = teacherDao.checkTeacherLogin(teacher);
-
         return checkTeacher;
     }
 

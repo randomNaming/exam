@@ -22,7 +22,7 @@ public interface CurdDao<T> extends BaseDao{
      * @param id
      * @return
      */
-    public T get(int id);
+    // public T get(int id);
 
     /**
      * 获取单条数据

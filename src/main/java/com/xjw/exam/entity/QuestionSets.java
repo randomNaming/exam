@@ -12,7 +12,7 @@ import java.util.Date;
 public class QuestionSets {
 
     // 编号
-    private Integer id;
+    private String id;
 
     private String setName;
 
@@ -26,11 +26,11 @@ public class QuestionSets {
     // 作者
     private String author;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
