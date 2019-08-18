@@ -2,8 +2,11 @@ package com.xjw.exam.web;
 
 import com.xjw.exam.entity.Student;
 import com.xjw.exam.entity.Teacher;
+import com.xjw.exam.entity.User;
 import com.xjw.exam.service.StudentService;
 import com.xjw.exam.service.TeacherService;
+import com.xjw.exam.utils.JSONResult;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +35,8 @@ public class UserAccessController {
     @Autowired
     private TeacherService teacherService;
 
+    private Logger accessLogger = Logger.getLogger(UserAccessController.class);
+
     /**
      * 登录会话创建
      *
@@ -51,7 +56,7 @@ public class UserAccessController {
         String password = request.getParameter("password");
 
         HttpSession session = request.getSession();
-        System.out.println("session.id = " + session.getId());
+        accessLogger.info("session.id = " + session.getId());
 
         if (LEVEL_STUDENT.equals(level)){
 
@@ -105,9 +110,10 @@ public class UserAccessController {
 
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(1000*60*60);
-        System.out.println(session.getId());
+        accessLogger.info("logout === id: " + session.getId());
+        // System.out.println(session.getAttribute("user").toString());
 
-        if (session.getAttribute("user")!=null && session.getAttribute("user").equals(session.getId())) {
+        if (session.getAttribute("user")!=null) {
             session.removeAttribute("user");
 
             logOut.put("msg", "用户已退出");
@@ -118,5 +124,20 @@ public class UserAccessController {
         }
 
         return logOut;
+    }
+
+    /**
+     * 根据当前会话获取用户信息
+     * @param request
+     * @return 用户信息
+     */
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    public JSONResult getUserInfo(HttpServletRequest request){
+
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+
+        JSONResult userInfo = new JSONResult(200,"成功获取用户信息",user);
+        return userInfo;
     }
 }

@@ -7,6 +7,9 @@ package com.xjw.exam.entity;
  */
 public class Teacher extends User{
 
+    /*
+     * 构造函数
+     */
     public Teacher(){
 
     }

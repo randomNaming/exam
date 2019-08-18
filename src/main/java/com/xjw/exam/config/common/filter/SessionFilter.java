@@ -16,7 +16,8 @@ public class SessionFilter implements Filter {
     String NO_LOGIN = "未登錄";
 
     // 白名單
-    String[] includeURLs = new String[]{"/exam/student/login","/exam/teacher/login","/exam/login"};
+    // TODO：List - String
+    String[] includeURLs = new String[]{"/exam/login"};
 
     // 会话日志
     Logger sessionInitLog = Logger.getLogger(SessionFilter.class);
@@ -51,7 +52,7 @@ public class SessionFilter implements Filter {
             if(session!=null && session.getAttribute("user")!=null){
                 filterChain.doFilter(servletRequest,servletResponse);
             }else{
-
+                // TODO：做重定向
                 sessionInitLog.info("@@@@@@@@@@@@@ 应当做重定向了！！！");
 
                 return;
