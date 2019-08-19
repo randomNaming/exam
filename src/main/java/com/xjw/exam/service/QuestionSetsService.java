@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 试卷集合 service层
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-19
+ */
 @Service
 public class QuestionSetsService {
 

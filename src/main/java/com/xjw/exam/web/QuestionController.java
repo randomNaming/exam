@@ -18,7 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 考试题目 Controller层
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-19
+ */
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/teacher/questions")
 //@CrossOrigin  跨域注解
@@ -28,20 +32,30 @@ public class QuestionController {
     private QuestionService questionService;
 
     /**
-     * 获取所有考试问题
+     * 获取所有考试问题集 - 列表
      * @param request
      * @param response
      * @return
      */
     @RequestMapping(value = "findAllList", method = RequestMethod.GET)
-    public PageInfo<Question> findAllList(HttpServletRequest request, HttpServletResponse response){
+    public List<Question> findAllList(HttpServletRequest request, HttpServletResponse response){
+        return questionService.findAllList();
+    }
+
+    /**
+     * 获取所有考试问题 - 分页
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "findPage", method = RequestMethod.GET)
+    public PageInfo<Question> findPage(HttpServletRequest request, HttpServletResponse response){
         PageInfo<Question> findpage;
         String strNum = request.getParameter("pageNum");
         String strSize = request.getParameter("pageSize");
         if(strNum != null && strSize != null) {
             int pageNum = Integer.parseInt(strNum);
             int pageSize = Integer.parseInt(strSize);
-            System.out.println("page == >" + pageNum +"  --- "  + pageSize);
             findpage = questionService.findByPage(pageNum, pageSize);
         }else{
             // 默认分页大小为 第1页/显示10条数据
@@ -52,16 +66,19 @@ public class QuestionController {
 
     /**
      * 根据试卷编号查询对应题集
-     * @param pageNum
-     * @param pageSize
+     * @param request
      * @param paperId
      * @return 题目列表
      */
     @RequestMapping(value = "findPaperList", method = RequestMethod.GET)
-    public PageInfo<Question> findPaperList(String paperId){
-        PageInfo<Question> QuestionSet = questionService.selectByIdSet(paperId);
-
-        return QuestionSet;
+    public PageInfo<Question> findPaperList(HttpServletRequest request, HttpServletResponse response, Integer paperId) {
+        if (paperId == -1) {
+            // 获取所有考试问卷
+            return findPage(request, response);
+        } else {
+            PageInfo<Question> QuestionSet = questionService.selectByIdSet(paperId);
+            return QuestionSet;
+        }
     }
 
     /**

@@ -58,6 +58,8 @@ public class CORSFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        /*
+         * 继承默认注解
+         */
     }
 }

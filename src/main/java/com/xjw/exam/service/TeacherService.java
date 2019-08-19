@@ -9,6 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 教师信息 service层
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-19
+ */
 @Service
 public class TeacherService {
     

@@ -12,10 +12,12 @@ import java.util.Date;
 public class QuestionSets {
 
     // 编号
-    private String id;
+    private Integer id;
 
+    // 试卷名称
     private String setName;
 
+    // 包含试题
     private String include;
 
     // 创建时间
@@ -26,11 +28,11 @@ public class QuestionSets {
     // 作者
     private String author;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

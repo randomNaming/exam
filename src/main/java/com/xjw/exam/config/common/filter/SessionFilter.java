@@ -12,8 +12,8 @@ import java.io.IOException;
 @WebFilter(filterName = "SessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
 
-    // 標識符；表示當前用戶為登錄
-    String NO_LOGIN = "未登錄";
+    // 标示符；表示當前用戶為登錄
+    String NO_LOGIN = "未登录";
 
     // 白名單
     // TODO：List - String
@@ -49,11 +49,12 @@ public class SessionFilter implements Filter {
 
             sessionInitLog.info("this session: " + session.getId());
 
-            if(session!=null && session.getAttribute("user")!=null){
+            if(session!=null && (session.getAttribute("user"))!=null){
                 filterChain.doFilter(servletRequest,servletResponse);
             }else{
                 // TODO：做重定向
                 sessionInitLog.info("@@@@@@@@@@@@@ 应当做重定向了！！！");
+                sessionInitLog.warn(NO_LOGIN);
 
                 return;
             }
@@ -79,6 +80,8 @@ public class SessionFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        /*
+         * 继承父类
+         */
     }
 }

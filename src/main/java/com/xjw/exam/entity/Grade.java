@@ -1,15 +1,25 @@
 package com.xjw.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
+/**
+ * 学生成绩
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-19
+ */
 public class Grade {
-    private String stuId;
+    private String stuId;  // 学号
 
-    private String stuName;
+    private String stuName; // 学生姓名
 
+    // 上次考试时间
+    // timezone根据时区来计算，默认GMT+8
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date lastTime;
 
-    private Float total;
+    private Float total; // 总分
 
     public String getStuId() {
         return stuId;

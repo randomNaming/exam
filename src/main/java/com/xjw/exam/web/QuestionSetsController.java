@@ -2,6 +2,7 @@ package com.xjw.exam.web;
 
 import com.xjw.exam.entity.Question;
 import com.xjw.exam.entity.QuestionSets;
+import com.xjw.exam.entity.Teacher;
 import com.xjw.exam.service.QuestionService;
 import com.xjw.exam.service.QuestionSetsService;
 import com.xjw.exam.utils.JSONResult;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController     // RestController = @Controller + @ResponBody
@@ -41,8 +43,12 @@ public class QuestionSetsController {
     }
 
     @RequestMapping(value = "addQuestionSet", method = RequestMethod.POST)
-    public JSONResult addQuestionSet(QuestionSets questionSet){
-        // 运用会话session获取用户名; - author
+    public JSONResult addQuestionSet(HttpServletRequest request,QuestionSets questionSet){
+        // 运用会话session获取用户名 - author
+        HttpSession session = request.getSession();
+        Teacher teacher = (Teacher)session.getAttribute("user");
+        questionSet.setAuthor(teacher.getName());
+
         JSONResult result = questionSetsService.insert(questionSet);
         return result;
     }

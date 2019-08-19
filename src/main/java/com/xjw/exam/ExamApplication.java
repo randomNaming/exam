@@ -15,6 +15,7 @@ public class ExamApplication {
         SpringApplication.run(ExamApplication.class, args);
     }
 
+    // 跨域拦截
     @Bean
     public FilterRegistrationBean registrationBean(){
         FilterRegistrationBean bean = new FilterRegistrationBean();
@@ -26,6 +27,7 @@ public class ExamApplication {
         return bean;
     }
 
+    // 会话拦截
     @Bean
     public FilterRegistrationBean sessionFilterBean(){
         FilterRegistrationBean bean = new FilterRegistrationBean();

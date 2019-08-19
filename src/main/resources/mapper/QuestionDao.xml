@@ -30,9 +30,10 @@
         SELECT
         <include refid="normal" />
         from question a
-        WHERE id IN
-        <foreach collection="array" item="id" index="index" open="(" close=")" separator=",">
-            #{id}
+        <include refid="leftJoinTeacher" />
+        WHERE a.id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            ${id}
         </foreach>
     </select>
     <select id="get" resultType="com.xjw.exam.entity.Question">

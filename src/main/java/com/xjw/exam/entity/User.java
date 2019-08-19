@@ -9,14 +9,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class User {
     // 编号
-    private String id;
+    protected String id;
 
     // 姓名
-    private String name;
+    protected String name;
 
     // 密码
     @JsonIgnore
-    private String password;
+    protected String password;
 
     public void setId(String id){
         this.id = id;

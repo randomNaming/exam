@@ -17,5 +17,5 @@ public interface QuestionDao extends CurdDao<Question> {
      * 获取问题集合
      * @param id
      */
-    public List<Question> selectByIdSet(String[] id);
+    public List<Question> selectByIdSet(List<Integer> id);
 }

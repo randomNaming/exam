@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 全局异常处理
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ * @date 2019-08-19
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

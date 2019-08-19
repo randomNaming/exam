@@ -19,8 +19,8 @@ public class Teacher extends User{
      * @describe 为验证登录做准备
      */
     public Teacher(String id, String password){
-        this.setId(id);
-        this.setPassword(password);
+        this.id = id;
+        this.password = password;
     }
 
 }
