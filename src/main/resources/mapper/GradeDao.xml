@@ -7,8 +7,9 @@
 
     <sql id="normal">
         a.stu_id AS "stuId",
-        a.access AS "access",
-        a.login_time AS "loginTime"
+        a.stu_name AS "stuName",
+        a.last_time AS "lastTime",
+        a.total AS "total"
     </sql>
     <select id="findAllList" resultType="com.xjw.exam.entity.Grade">
         SELECT
@@ -22,7 +23,7 @@
         <include refid="normal" />
         FROM grade a
         WHERE
-        id=#{id}
+        a.stu_id=#{id}
     </select>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.Grade">

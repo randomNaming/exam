@@ -9,8 +9,8 @@ import java.util.Date;
  */
 public class LoginHistory {
 
-    // 学号
-    private String stuId;
+    // 賬號
+    private String userId;
 
     // 权限
     private String access;
@@ -18,12 +18,21 @@ public class LoginHistory {
     // 登陆时间
     private Date loginTime;
 
-    public String getStuId() {
-        return stuId;
+    public LoginHistory(){
+
     }
 
-    public void setStuId(String stuId) {
-        this.stuId = stuId;
+    public LoginHistory(String userId, String level){
+        this.userId = userId;
+        this.access = level;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getAccess() {

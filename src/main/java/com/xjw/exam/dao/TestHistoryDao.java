@@ -1,6 +1,7 @@
 package com.xjw.exam.dao;
 
 import com.xjw.exam.entity.TestHistory;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TestHistoryDao extends CurdDao<TestHistory> {
+    public int count(@Param("stuId") String stuId, @Param("paperId") Integer paperId);
 }

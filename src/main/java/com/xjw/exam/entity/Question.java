@@ -1,6 +1,7 @@
 package com.xjw.exam.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 
@@ -18,20 +19,24 @@ public class Question {
     private String content;
 
     // 题目答案
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String answer;
 
     // 题目分数
     private Integer score;
 
     // 教师编号
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String teacherId;
 
     // 教师姓名
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String teacherName;
 
     // 创建时间
     // timezone根据时区来计算，默认GMT+8
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Date createTime;
 
     private String choice;

@@ -15,8 +15,35 @@
         a.choice AS "choice",
         t.name AS "teacherName"
     </sql>
+    <sql id="examing">
+        a.id AS "id",
+        a.content AS "content",
+        a.score AS "score",
+        a.choice AS "choice"
+    </sql>
+
     <sql id="leftJoinTeacher">
         LEFT JOIN teacher t ON t.id = a.teacher_id
+    </sql>
+    <sql id="joinTestHistory">
+        SELECT
+        id
+        FROM
+        question
+        LEFT JOIN(
+        SELECT
+        q_id AS i
+        FROM
+        test_history
+        WHERE
+        test_history.stu_id = #{stuId}
+        AND q_set_id = ${paperId})
+        AS t1 ON question.id = t1.i
+        WHERE
+        t1.i IS NULL AND id IN
+        <foreach collection="questionId" item="orderid" index="index" open="(" close=")" separator=",">
+            ${orderid}
+        </foreach>
     </sql>
     <select id="findAllList" resultType="com.xjw.exam.entity.Question">
         SELECT
@@ -26,6 +53,15 @@
         ORDER BY create_time
         DESC
     </select>
+    <select id="get" resultType="com.xjw.exam.entity.Question">
+        SELECT
+        <include refid="normal" />
+        FROM question a
+        <include refid="leftJoinTeacher" />
+        WHERE
+        id=#{id}
+    </select>
+
     <select id="selectByIdSet" resultType="com.xjw.exam.entity.Question">
         SELECT
         <include refid="normal" />
@@ -36,14 +72,18 @@
             ${id}
         </foreach>
     </select>
-    <select id="get" resultType="com.xjw.exam.entity.Question">
+
+    <select id="getExamQuestion" resultType="com.xjw.exam.entity.Question">
         SELECT
-        <include refid="normal" />
-        FROM question a
-        <include refid="leftJoinTeacher" />
+        <include refid="examing" />
+        from question a
         WHERE
-        id=#{id}
+        a.id= ANY(
+        <include refid="joinTestHistory" />
+
+        )
     </select>
+
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.Question">
         INSERT INTO

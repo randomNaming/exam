@@ -1,8 +1,10 @@
 package com.xjw.exam.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 问题属性
@@ -27,6 +29,9 @@ public class QuestionSets {
 
     // 作者
     private String author;
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<Question> questions;
 
     public Integer getId() {
         return id;

@@ -19,6 +19,10 @@ public class QuestionSetsService {
     @Autowired
     private QuestionSetsDao questionSetsDao;
 
+    public QuestionSets get(Integer paperId){
+        return questionSetsDao.get(paperId);
+    }
+
     public List<QuestionSets> findAllList() {
         return questionSetsDao.findAllList();
     }

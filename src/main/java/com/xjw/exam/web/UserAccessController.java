@@ -1,8 +1,10 @@
 package com.xjw.exam.web;
 
+import com.xjw.exam.entity.LoginHistory;
 import com.xjw.exam.entity.Student;
 import com.xjw.exam.entity.Teacher;
 import com.xjw.exam.entity.User;
+import com.xjw.exam.service.LoginHistoryService;
 import com.xjw.exam.service.StudentService;
 import com.xjw.exam.service.TeacherService;
 import com.xjw.exam.utils.JSONResult;
@@ -34,6 +36,8 @@ public class UserAccessController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private LoginHistoryService loginHistoryService;
 
     private Logger accessLogger = Logger.getLogger(UserAccessController.class);
 
@@ -64,6 +68,7 @@ public class UserAccessController {
 
             Student student = studentService.checkStudentLogin(studentLogin);
             if(student != null){
+                // 可能後期會用到loginTime & level
                 session.setAttribute("user", student);
 
                 // 后期加入JSONResult
@@ -89,6 +94,9 @@ public class UserAccessController {
             logIn.put("msg","请选择用户身份！");
             logIn.put("success", false);
         }
+
+        LoginHistory loginRecord = new LoginHistory(id, level);
+        loginHistoryService.insert(loginRecord);
 
         return logIn;
     }

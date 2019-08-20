@@ -1,5 +1,7 @@
 package com.xjw.exam.service;
 
+import com.xjw.exam.dao.TestHistoryDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +11,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TestHistoryService {
+
+    @Autowired
+    private TestHistoryDao testHistoryDao;
+
+    public int hasDoneTotal(String stuId, Integer paperId) {
+        return testHistoryDao.count(stuId, paperId);
+    }
 }

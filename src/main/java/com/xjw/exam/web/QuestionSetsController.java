@@ -2,6 +2,7 @@ package com.xjw.exam.web;
 
 import com.xjw.exam.entity.Question;
 import com.xjw.exam.entity.QuestionSets;
+import com.xjw.exam.entity.Student;
 import com.xjw.exam.entity.Teacher;
 import com.xjw.exam.service.QuestionService;
 import com.xjw.exam.service.QuestionSetsService;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController     // RestController = @Controller + @ResponBody
 @RequestMapping("/teacher/paperQuestionSets")
@@ -51,6 +55,29 @@ public class QuestionSetsController {
 
         JSONResult result = questionSetsService.insert(questionSet);
         return result;
+    }
+
+    @RequestMapping(value = "examing", method = RequestMethod.POST)
+    public Map<String, Object> examing(HttpServletRequest request, Integer id){
+        //String id = request.getParameter("id");
+      //  System.out.println("paperId = " + id);
+        QuestionSets paper = questionSetsService.get(id);
+        HttpSession session = request.getSession();
+        Student student = (Student)session.getAttribute("user");
+        Map<String, Object> map = questionService.questionStram(paper, student);
+        /*// 获取session中所有的键值
+        Enumeration<?> enumeration = session.getAttributeNames();
+// 遍历enumeration中的
+        while (enumeration.hasMoreElements()) {
+// 获取session键值
+            String name = enumeration.nextElement().toString();
+// 根据键值取session中的值
+            Object value = session.getAttribute(name);
+// 打印结果
+            System.out.println("<B>" + name + "</B>=" + value + "<br>");
+        }*/
+
+        return map;
     }
 
     @RequestMapping(value = "removeQuestionSet", method = RequestMethod.GET)

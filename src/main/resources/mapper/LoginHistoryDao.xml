@@ -24,12 +24,12 @@
         WHERE
         id=#{id}
     </select>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
-            keyColumn="id" parameterType="com.xjw.exam.entity.LoginHistory">
+<!--    無主鍵-->
+    <insert id="insert"  parameterType="com.xjw.exam.entity.LoginHistory">
         INSERT INTO
-        login_history(id,name,password)
+        login_history(user_id,access,login_time)
         VALUES
-        (#{id},#{name},#{password})
+        (#{userId},#{access},#{loginTime})
     </insert>
     <update id="update" parameterType="com.xjw.exam.entity.LoginHistory">
         UPDATE login_history

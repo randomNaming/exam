@@ -11,7 +11,7 @@ public class TestHistory {
     // 学生学号
     private String stuId;
     //
-    private Integer qSet;
+    private Integer qSetId;
     // 问题编号
     private Integer qId;
     // 学生选择
@@ -29,13 +29,6 @@ public class TestHistory {
         this.stuId = stuId;
     }
 
-    public Integer getqSet() {
-        return qSet;
-    }
-
-    public void setqSet(Integer qSet) {
-        this.qSet = qSet;
-    }
 
     public Integer getqId() {
         return qId;
@@ -67,5 +60,13 @@ public class TestHistory {
 
     public void setTestTime(Date testTime) {
         this.testTime = testTime;
+    }
+
+    public Integer getqSetId() {
+        return qSetId;
+    }
+
+    public void setqSetId(Integer qSetId) {
+        this.qSetId = qSetId;
     }
 }

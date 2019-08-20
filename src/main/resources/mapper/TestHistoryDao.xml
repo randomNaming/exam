@@ -7,7 +7,7 @@
 
     <sql id="normal">
         a.stu_id AS "stuId",
-        a.q_set AS "qSet",
+        a.q_set_id AS "qSetId",
         a.q_id AS "qId",
         a.stu_choise AS "stuChoise",
         a.stu_score AS "stuScore",
@@ -26,6 +26,12 @@
         FROM test_history a
         WHERE
         id=#{id}
+    </select>
+    <select id="count" resultType="Integer">
+        SELECT COUNT(*) AS done
+        FROM test_history a
+        WHERE a.stu_id=#{stuId}
+        AND a.q_set_id=${paperId}
     </select>
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
             keyColumn="id" parameterType="com.xjw.exam.entity.TestHistory">
