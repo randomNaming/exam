@@ -25,4 +25,20 @@
         WHERE
         a.stu_id=#{id}
     </select>
+    <select id="search" resultType="com.xjw.exam.entity.GradeView">
+        SELECT
+        <include refid="normal" />
+        FROM gradeview a
+        <where>
+            <if test="elements.stuId != null">
+                AND a.stu_id LIKE CONCAT('%',#{elements.stuId},'%')
+            </if>
+            <if test="elements.stuName != null">
+                AND a.stu_name LIKE CONCAT('%',#{elements.stuName},'%')
+            </if>
+            <if test="leftScoresRange != null and rightScoresRange != null">
+                AND a.total BETWEEN ${leftScoreRange} AND ${rightScoreRange}
+            </if>
+        </where>
+    </select>
 </mapper>

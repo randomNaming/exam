@@ -1,5 +1,8 @@
 package com.xjw.exam.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.Date;
 
 /**
@@ -9,8 +12,10 @@ import java.util.Date;
  */
 public class TestHistory {
     // 学生学号
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String stuId;
     //
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer qSetId;
     // 问题编号
     private Integer qId;
@@ -19,7 +24,11 @@ public class TestHistory {
     // 学生分数
     private Integer stuScore;
     // 考试时长
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date testTime;
+    // 試題
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Question question;
 
     public TestHistory(){}
 
@@ -78,5 +87,13 @@ public class TestHistory {
 
     public void setqSetId(Integer qSetId) {
         this.qSetId = qSetId;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }

@@ -100,7 +100,7 @@ public class UserAccessController {
          */
         LoginHistory loginRecord = new LoginHistory(id, level);
         int isNewRecord = loginHistoryService.count(loginRecord);
-        accessLogger.info("isNewRecord = " + isNewRecord);
+        // accessLogger.info("isNewRecord = " + isNewRecord);
         if(isNewRecord != 0){
             loginHistoryService.update(loginRecord);
         }else {

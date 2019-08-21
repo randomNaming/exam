@@ -6,7 +6,7 @@
 <mapper namespace="com.xjw.exam.dao.LoginHistoryDao">
 
     <sql id="normal">
-        a.stu_id AS "stuId",
+        a.user_id AS "userId",
         a.access AS "access",
         a.login_time AS "loginTime"
     </sql>
@@ -22,7 +22,7 @@
         <include refid="normal" />
         FROM login_history a
         WHERE
-        id=#{id}
+        a.user_id=#{id}
     </select>
     <select id="count" resultType="Integer">
         SELECT

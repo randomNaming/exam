@@ -1,5 +1,9 @@
 package com.xjw.exam.entity;
 
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -16,6 +20,7 @@ public class LoginHistory {
     private String access;
 
     // 登陆时间
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date loginTime;
 
     public LoginHistory(){

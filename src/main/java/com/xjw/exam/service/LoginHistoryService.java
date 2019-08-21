@@ -52,4 +52,8 @@ public class LoginHistoryService {
         }
 
     }
+
+    public LoginHistory findByUserId(String id) {
+        return loginHistoryDao.get(id);
+    }
 }

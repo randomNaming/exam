@@ -13,6 +13,12 @@
         a.stu_score AS "stuScore",
         a.test_time AS "testTime"
     </sql>
+    <sql id="record">
+        a.q_id AS "qId",
+        a.stu_choise AS "stuChoise",
+        a.stu_score AS "stuScore",
+        a.test_time AS "testTime"
+    </sql>
     <select id="findAllList" resultType="com.xjw.exam.entity.TestHistory">
         SELECT
         <include refid="normal" />
@@ -25,14 +31,31 @@
         <include refid="normal" />
         FROM test_history a
         WHERE
-        id=#{id}
+        a.stu_id=#{id}
     </select>
+
     <select id="count" resultType="Integer">
         SELECT COUNT(*) AS done
         FROM test_history a
-        WHERE a.stu_id=#{stuId}
-        AND a.q_set_id=${paperId}
+        <where>
+            a.stu_id=#{stuId}
+            <if test="paperId != null">
+                AND a.q_set_id=${paperId}
+            </if>
+        </where>
     </select>
+
+    <select id="testRecord" resultType="com.xjw.exam.entity.TestHistory">
+        SELECT
+        <include refid="record" />
+        FROM test_history a
+        WHERE
+        a.stu_id=#{stuId}
+        <if test="paperId != null">
+            AND a.q_set_id=#{paperId}
+        </if>
+    </select>
+
     <insert id="insert" parameterType="com.xjw.exam.entity.TestHistory">
         INSERT INTO
         test_history(stu_id,q_set_id,q_id,stu_choise,stu_score,test_time)

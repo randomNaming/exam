@@ -1,6 +1,7 @@
 package com.xjw.exam.dao;
 
 import com.xjw.exam.entity.GradeView;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface GradeViewDao {
      * @return
      */
     public List<GradeView> findAllList();
+
+    public List<GradeView> search(@Param("elements") GradeView elements, @Param("leftScoresRange") Integer leftScoresRange,
+                                  @Param("rightScoresRange") Integer rightScoresRange);
 }
