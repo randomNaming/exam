@@ -24,6 +24,17 @@
         WHERE
         id=#{id}
     </select>
+    <select id="count" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            login_history
+        <where>
+            <if test="userId != null">AND user_id=#{userId}</if>
+            <if test="access != null">AND access=#{access}</if>
+<!--            <if test="logintime != null">login_time=#{loginTime}</if>-->
+        </where>
+    </select>
 <!--    無主鍵-->
     <insert id="insert"  parameterType="com.xjw.exam.entity.LoginHistory">
         INSERT INTO
@@ -34,10 +45,10 @@
     <update id="update" parameterType="com.xjw.exam.entity.LoginHistory">
         UPDATE login_history
         <set>
-            <if test="name != null">name=#{name},</if>
-            <if test="password != null">password=#{password}</if>
+            <if test="access != null">access=#{access},</if>
+            <if test="loginTime != null">login_time=#{loginTime}</if>
         </set>
-        WHERE id=#{id}
+        WHERE user_id=#{userId}
     </update>
     <delete id="delete">
         DELETE FROM

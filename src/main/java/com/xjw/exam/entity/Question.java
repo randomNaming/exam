@@ -13,7 +13,7 @@ import java.util.Date;
 public class Question {
 
     // 问题编号
-    private String id;
+    private Integer id;
 
     // 题目内容
     private String content;
@@ -41,11 +41,11 @@ public class Question {
 
     private String choice;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

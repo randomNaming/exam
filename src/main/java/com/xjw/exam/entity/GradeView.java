@@ -9,7 +9,7 @@ import java.util.Date;
  * @author xiajingwei - S.H.Xjw@outlook.com
  * @date 2019-08-19
  */
-public class Grade {
+public class GradeView {
     private String stuId;  // 学号
 
     private String stuName; // 学生姓名
@@ -19,7 +19,7 @@ public class Grade {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT-5")
     private Date lastTime;
 
-    private Float total; // 总分
+    private Integer total; // 总分
 
     public String getStuId() {
         return stuId;
@@ -45,11 +45,11 @@ public class Grade {
         this.lastTime = lastTime;
     }
 
-    public Float getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(Float total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 }

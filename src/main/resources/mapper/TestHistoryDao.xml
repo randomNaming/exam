@@ -33,12 +33,11 @@
         WHERE a.stu_id=#{stuId}
         AND a.q_set_id=${paperId}
     </select>
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
-            keyColumn="id" parameterType="com.xjw.exam.entity.TestHistory">
+    <insert id="insert" parameterType="com.xjw.exam.entity.TestHistory">
         INSERT INTO
-        test_history(id,name,password)
+        test_history(stu_id,q_set_id,q_id,stu_choise,stu_score,test_time)
         VALUES
-        (#{id},#{name},#{password})
+        (#{stuId},#{qSetId},#{qId},#{stuChoise},#{stuScore},#{testTime})
     </insert>
     <update id="update" parameterType="com.xjw.exam.entity.TestHistory">
         UPDATE test_history

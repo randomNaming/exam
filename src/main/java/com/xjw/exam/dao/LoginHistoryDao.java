@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface LoginHistoryDao extends CurdDao<LoginHistory> {
+    public int count(LoginHistory loginHistory);
 }

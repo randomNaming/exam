@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +61,7 @@ public class QuestionSetsController {
       //  System.out.println("paperId = " + id);
         QuestionSets paper = questionSetsService.get(id);
         HttpSession session = request.getSession();
+        session.setAttribute("paper", paper);
         Student student = (Student)session.getAttribute("user");
         Map<String, Object> map = questionService.questionStram(paper, student);
         /*// 获取session中所有的键值

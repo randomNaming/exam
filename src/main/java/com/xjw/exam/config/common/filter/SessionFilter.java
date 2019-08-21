@@ -39,7 +39,7 @@ public class SessionFilter implements Filter {
         String uri = request.getRequestURI();
 
         // 调试作用：监测是否要过滤或排除
-        sessionInitLog.info("Filter URL >>>>>> " + uri);
+        // sessionInitLog.info("Filter URL >>>>>> " + uri);
 
         boolean needFilter = isNeedFilter(uri);
 
@@ -47,7 +47,7 @@ public class SessionFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }else{
 
-            sessionInitLog.info("this session: " + session.getId());
+            // sessionInitLog.info("this session: " + session.getId());
 
             if(session!=null && (session.getAttribute("user"))!=null){
                 filterChain.doFilter(servletRequest,servletResponse);

@@ -1,6 +1,6 @@
 package com.xjw.exam.service;
 
-import com.xjw.exam.dao.GradeDao;
+import com.xjw.exam.dao.GradeViewDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
  * @date 2019-08-19
  */
 @Service
-public class GradeService {
+public class GradeViewService {
 
     @Autowired
-    private GradeDao gradeDao;
+    private GradeViewDao gradeDao;
 }

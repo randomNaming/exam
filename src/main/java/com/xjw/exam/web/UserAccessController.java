@@ -95,9 +95,17 @@ public class UserAccessController {
             logIn.put("success", false);
         }
 
+        /*
+         * 刷新登錄記錄
+         */
         LoginHistory loginRecord = new LoginHistory(id, level);
-        loginHistoryService.insert(loginRecord);
-
+        int isNewRecord = loginHistoryService.count(loginRecord);
+        accessLogger.info("isNewRecord = " + isNewRecord);
+        if(isNewRecord != 0){
+            loginHistoryService.update(loginRecord);
+        }else {
+            loginHistoryService.insert(loginRecord);
+        }
         return logIn;
     }
 

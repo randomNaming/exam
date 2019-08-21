@@ -1,7 +1,6 @@
 package com.xjw.exam.web;
 
-import com.xjw.exam.entity.Grade;
-import com.xjw.exam.service.GradeService;
+import com.xjw.exam.service.GradeViewService;
 import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GradeController {
 
     @Autowired
-    private GradeService gradeService;
+    private GradeViewService gradeViewService;
 
     @RequestMapping(value = "searchStuScore", method = RequestMethod.GET)
     public JSONResult searchStuScore(HttpServletRequest request, HttpServletResponse response,Float LeftScoresRange, Float RightScoresRange){
@@ -33,4 +32,5 @@ public class GradeController {
 
         return JSONResult.error();
     }
+
 }

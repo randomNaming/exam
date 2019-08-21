@@ -3,17 +3,16 @@ package com.xjw.exam.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.xjw.exam.dao.GradeDao;
+import com.xjw.exam.dao.GradeViewDao;
 import com.xjw.exam.dao.QuestionDao;
 import com.xjw.exam.dao.QuestionSetsDao;
-import com.xjw.exam.entity.Grade;
-import com.xjw.exam.entity.Question;
-import com.xjw.exam.entity.QuestionSets;
-import com.xjw.exam.entity.Student;
+import com.xjw.exam.entity.*;
 import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -31,7 +30,7 @@ public class QuestionService {
     @Autowired
     private QuestionSetsDao questionSetsDao;
     @Autowired
-    private GradeDao gradeDao;
+    private GradeViewDao gradeDao;
     @Autowired
     private TestHistoryService testHistoryService;
 
@@ -144,7 +143,7 @@ public class QuestionService {
         examing.put("hasDone", hasDoneTotal);
         // 獲取當前分數
         float score = 0;
-        Grade stuGrade = gradeDao.get(student.getId());
+        GradeView stuGrade = gradeDao.get(student.getId());
         if(stuGrade != null){
             score = stuGrade.getTotal();
         }
@@ -152,5 +151,41 @@ public class QuestionService {
         examing.put("score", score);
 
         return examing;
+    }
+
+
+    public JSONResult judge(HttpServletRequest request, Question question) {
+        HttpSession session = request.getSession();
+        QuestionSets paper = (QuestionSets) session.getAttribute("paper");
+        Student student = (Student)session.getAttribute("user");
+
+        Question judgeQuestion = questionDao.getByElement(question);
+        TestHistory testHistory = new TestHistory(student.getId(),paper.getId(),
+                question.getId(),question.getAnswer(),new Date());
+        Map<String,Object> judgeReturn = new HashMap<>();
+        if (judgeQuestion != null){
+            testHistory.setStuScore(judgeQuestion.getScore());
+            judgeReturn.put("score", judgeQuestion.getScore());
+            // 回答正確
+            judgeReturn.put("correct", true);
+        }else{
+            testHistory.setStuScore(0);
+            // 回答錯圖
+            judgeReturn.put("score", 0);
+            judgeReturn.put("correct", false);
+        }
+        /*
+         * 後期可能會刪除
+         */
+//        System.out.println("questionID == " + question.getId());
+//        Question temp = questionDao.get(question.getId());
+//        if(temp!=null){
+//            System.out.println("answer ===" + temp.getAnswer());
+//        }else {
+//            System.out.println("this is null");
+//        }
+        judgeReturn.put("answer",(questionDao.get(question.getId())).getAnswer());
+        testHistoryService.insert(testHistory);
+        return new JSONResult(200,"處理成功！",judgeReturn);
     }
 }

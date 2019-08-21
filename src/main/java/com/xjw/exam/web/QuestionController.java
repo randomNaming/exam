@@ -96,4 +96,14 @@ public class QuestionController {
         JSONResult result = questionService.insert(question);
         return result;
     }
+
+    @RequestMapping(value = "judge", method = RequestMethod.POST)
+    public JSONResult judge(HttpServletRequest request, Question question){
+        if (question.getAnswer() != null){
+            JSONResult result = questionService.judge(request, question);
+            return result;
+        }else{
+            return JSONResult.errorMsg("請選擇答案回答問題");
+        }
+    }
 }

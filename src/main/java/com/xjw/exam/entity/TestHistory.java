@@ -21,6 +21,16 @@ public class TestHistory {
     // 考试时长
     private Date testTime;
 
+    public TestHistory(){}
+
+    public TestHistory(String stuId, Integer qSetId, Integer qId, String stuChoise, Date testTime){
+        this.stuId = stuId;
+        this.qSetId = qSetId;
+        this.qId = qId;
+        this.stuChoise = stuChoise;
+        this.testTime = testTime;
+    }
+
     public String getStuId() {
         return stuId;
     }

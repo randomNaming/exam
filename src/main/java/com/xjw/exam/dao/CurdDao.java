@@ -29,7 +29,7 @@ public interface CurdDao<T> extends BaseDao{
      * @param entity
      * @return
      */
-    public T get(T entity);
+    public T getByElement(T entity);
 
     /**
      * 查询所有数据列表

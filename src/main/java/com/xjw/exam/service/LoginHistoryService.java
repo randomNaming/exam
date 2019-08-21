@@ -21,7 +21,7 @@ public class LoginHistoryService {
     private LoginHistoryDao loginHistoryDao;
 
     /*
-     * 添加题目
+     * 新增登錄時間
      */
     public JSONResult insert(LoginHistory loginHistory) {
         loginHistory.setLoginTime(new Date());
@@ -31,5 +31,25 @@ public class LoginHistoryService {
         }else{
             return JSONResult.errorMsg("添加信息失敗！");
         }
+    }
+
+    public int count(LoginHistory loginRecord) {
+        int recordCount = loginHistoryDao.count(loginRecord);
+        return recordCount;
+    }
+
+    public boolean update(LoginHistory loginRecord) {
+        loginRecord.setLoginTime(new Date());
+        try {
+            int effectedNum = loginHistoryDao.update(loginRecord);
+            if(effectedNum > 0){
+                return true;
+            }else{
+                throw new RuntimeException("更新登陸記錄息失败！");
+            }
+        }catch (Exception e){
+            throw new RuntimeException("更新登陸記錄息失败:" + e.getMessage());
+        }
+
     }
 }

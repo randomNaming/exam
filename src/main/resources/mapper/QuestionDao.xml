@@ -53,13 +53,29 @@
         ORDER BY create_time
         DESC
     </select>
-    <select id="get" resultType="com.xjw.exam.entity.Question">
+    <select id="get"  resultType="com.xjw.exam.entity.Question">
         SELECT
         <include refid="normal" />
         FROM question a
         <include refid="leftJoinTeacher" />
         WHERE
-        id=#{id}
+        a.id=#{id}
+    </select>
+
+    <select id="getByElement" parameterType="com.xjw.exam.entity.Question" resultType="com.xjw.exam.entity.Question">
+        SELECT
+        <include refid="normal" />
+        FROM question a
+        <include refid="leftJoinTeacher" />
+        <where>
+            a.id=#{id}
+            <if test="answer != null and answer != ''">
+                AND a.answer = #{answer}
+            </if>
+            <if test="score != null">
+                AND a.score = ${score}
+            </if>
+        </where>
     </select>
 
     <select id="selectByIdSet" resultType="com.xjw.exam.entity.Question">
