@@ -17,7 +17,7 @@ public class SessionFilter implements Filter {
 
     // 白名單
     // TODO：List - String
-    String[] includeURLs = new String[]{"/exam/login"};
+    String[] includeURLs = new String[]{"/exam/login","/exam/student/checkById","/exam/teacher/checkById","/exam/student/addStudent","/exam/teacher/addStudent"};
 
     // 会话日志
     Logger sessionInitLog = Logger.getLogger(SessionFilter.class);
