@@ -6,6 +6,7 @@ import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,11 +41,26 @@ public class QuestionSetsService {
 
 
     public JSONResult insert(QuestionSets questionSet) {
+        questionSet.setCreateTime(new Date());
         int result = questionSetsDao.insert(questionSet);
         if(result > 0){
             return new JSONResult("添加成功");
         }else{
             return JSONResult.error();
+        }
+    }
+
+    public boolean updateInclude(String qId) {
+        List<Integer> idList = questionSetsDao.tempByUpdateInclude(qId);
+        if(idList != null) {
+            int result = questionSetsDao.updateInclude(qId, idList);
+            if(result > 0 ){
+                return true;
+            }else{
+                throw new RuntimeException("更新考卷題目失敗！");
+            }
+        }else {
+            return false;
         }
     }
 }

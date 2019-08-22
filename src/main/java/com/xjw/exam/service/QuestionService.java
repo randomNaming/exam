@@ -188,4 +188,13 @@ public class QuestionService {
         testHistoryService.insert(testHistory);
         return new JSONResult(200,"處理成功！",judgeReturn);
     }
+
+    public boolean delete(String id) {
+        int result = questionDao.delete(id);
+        if( result > 0){
+            return true;
+        }else{
+            throw new RuntimeException("删除題目信息失败！");
+        }
+    }
 }

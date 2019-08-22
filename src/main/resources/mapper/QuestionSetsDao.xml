@@ -41,6 +41,21 @@
         </set>
         WHERE id=#{id}
     </update>
+    <select id="tempByUpdateInclude" resultType="Integer">
+        SELECT p.id
+        FROM
+            question_sets p
+        WHERE
+            p.include LIKE CONCAT('%Q',#{qId},'%')
+    </select>
+    <update id="updateInclude" >
+        UPDATE question_sets
+        SET include = REPLACE(include,CONCAT('Q',#{qId}),'')
+        WHERE id IN
+        <foreach collection="id" item="orderid" index="index" open="(" close=")" separator=",">
+            ${orderid}
+        </foreach>
+    </update>
     <delete id="delete">
         DELETE FROM
         question_sets

@@ -70,6 +70,12 @@
         </set>
         WHERE id=#{id}
     </update>
+    <delete id="deleteByQuestionId">
+        DELETE FROM
+        test_history
+        WHERE
+        q_id=${qId}
+    </delete>
     <delete id="delete">
         DELETE FROM
         test_history

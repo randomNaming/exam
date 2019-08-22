@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.xjw.exam.entity.Question;
 import com.xjw.exam.entity.Teacher;
 import com.xjw.exam.service.QuestionService;
+import com.xjw.exam.service.QuestionSetsService;
+import com.xjw.exam.service.TestHistoryService;
 import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,7 +31,11 @@ import java.util.Map;
 public class QuestionController {
 
     @Autowired
+    private QuestionSetsService questionSetsService;
+    @Autowired
     private QuestionService questionService;
+    @Autowired
+    private TestHistoryService testHistoryService;
 
     /**
      * 获取所有考试问题集 - 列表
@@ -53,6 +59,7 @@ public class QuestionController {
         PageInfo<Question> findpage;
         String strNum = request.getParameter("pageNum");
         String strSize = request.getParameter("pageSize");
+        // System.out.println("num=" + strNum + "size: " + strSize);
         if(strNum != null && strSize != null) {
             int pageNum = Integer.parseInt(strNum);
             int pageSize = Integer.parseInt(strSize);
@@ -104,6 +111,19 @@ public class QuestionController {
             return result;
         }else{
             return JSONResult.errorMsg("請選擇答案回答問題");
+        }
+    }
+
+    @RequestMapping(value = "delete" , method = RequestMethod.POST)
+    public JSONResult delete(String id){
+        boolean res1 = questionService.delete(id);
+        boolean res2 = testHistoryService.deleteByQuestion(id);
+        boolean res3 = questionSetsService.updateInclude(id);
+
+        if(res1 && res2 && res3){
+            return new JSONResult("刪除成功！");
+        }else{
+            return JSONResult.error();
         }
     }
 }

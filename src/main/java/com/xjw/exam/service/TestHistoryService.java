@@ -44,12 +44,20 @@ public class TestHistoryService {
         PageHelper.startPage(pageNum,pageSize);
         List<TestHistory> list = testHistoryDao.testRecord(student.getId(),paperId);
         PageInfo<TestHistory> page = new PageInfo<>(list);
-        System.out.println("size : " + list.size());
         for (TestHistory test:list){
             Question question = questionDao.get(test.getqId());
             test.setQuestion(question);
         }
         return page;
 
+    }
+
+    public boolean deleteByQuestion(String id) {
+        int result = testHistoryDao.deleteByQuestionId(id);
+        if(result > 0 ){
+            return true;
+        }else {
+            throw new RuntimeException("刪除考試記錄下的對應題目失敗！");
+        }
     }
 }

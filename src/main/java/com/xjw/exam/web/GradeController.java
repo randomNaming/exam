@@ -77,7 +77,6 @@ public class GradeController {
         GradeView searchParam = new GradeView();
         searchParam.setStuId(id);
         searchParam.setStuName(name);
-        System.out.println("left=" + leftScoresRange + " right=" + rightScoresRange + "id:" + id + "name:" + name+"pageNum=" + pageNum + "pageSize="+ pageSize);
         PageInfo<GradeView> page = gradeViewService.searchInfo(searchParam,leftScoresRange,rightScoresRange,pageNum,pageSize);
 
         return page;

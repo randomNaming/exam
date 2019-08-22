@@ -17,4 +17,6 @@ public interface TestHistoryDao extends CurdDao<TestHistory> {
     public int count(@Param("stuId") String stuId, @Param("paperId") Integer paperId);
 
     public List<TestHistory> testRecord(@Param("stuId")String stuId, @Param("paperId")Integer paperId);
+
+    public int deleteByQuestionId(String qId);
 }
