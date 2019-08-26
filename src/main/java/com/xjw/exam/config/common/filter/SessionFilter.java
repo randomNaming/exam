@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebFilter(filterName = "SessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
 
-    // 标示符；表示當前用戶為登錄
+    // 标示符；表示當前用戶未登录
     String NO_LOGIN = "未登录";
 
     // 白名單
@@ -31,15 +31,12 @@ public class SessionFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest)servletRequest;
-        HttpServletResponse response = (HttpServletResponse)servletResponse;
+        // HttpServletResponse response = (HttpServletResponse)servletResponse;
 
         // 獲取會話信息，如果不存在則爲空
         HttpSession session = request.getSession(false);
 
         String uri = request.getRequestURI();
-
-        // 调试作用：监测是否要过滤或排除
-        // sessionInitLog.info("Filter URL >>>>>> " + uri);
 
         boolean needFilter = isNeedFilter(uri);
 
@@ -47,16 +44,13 @@ public class SessionFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
         }else{
 
-            // sessionInitLog.info("this session: " + session.getId());
-
             if(session!=null && (session.getAttribute("user"))!=null){
                 filterChain.doFilter(servletRequest,servletResponse);
             }else{
                 // TODO：做重定向
                 sessionInitLog.info("@@@@@@@@@@@@@ 应当做重定向了！！！");
-                sessionInitLog.warn(NO_LOGIN);
+                sessionInitLog.info(NO_LOGIN);
 
-                return;
             }
         }
     }

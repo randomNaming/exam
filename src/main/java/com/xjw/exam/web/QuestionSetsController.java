@@ -28,6 +28,7 @@ public class QuestionSetsController {
     @Autowired
     private QuestionService questionService;
 
+    // TODO:所有问卷显示并分页
     public List<Question> findPaper(HttpServletResponse response, HttpServletRequest request){
         // 获取试卷id
         String paperId = request.getParameter("id");
@@ -57,31 +58,15 @@ public class QuestionSetsController {
 
     @RequestMapping(value = "examing", method = RequestMethod.POST)
     public Map<String, Object> examing(HttpServletRequest request, Integer id){
-        //String id = request.getParameter("id");
-      //  System.out.println("paperId = " + id);
         QuestionSets paper = questionSetsService.get(id);
         HttpSession session = request.getSession();
         session.setAttribute("paper", paper);
         Student student = (Student)session.getAttribute("user");
-        Map<String, Object> map = questionService.questionStram(paper, student);
-        /*// 获取session中所有的键值
-        Enumeration<?> enumeration = session.getAttributeNames();
-// 遍历enumeration中的
-        while (enumeration.hasMoreElements()) {
-// 获取session键值
-            String name = enumeration.nextElement().toString();
-// 根据键值取session中的值
-            Object value = session.getAttribute(name);
-// 打印结果
-            System.out.println("<B>" + name + "</B>=" + value + "<br>");
-        }*/
-
-        return map;
+        return questionService.questionStram(paper, student);
     }
 
     @RequestMapping(value = "removeQuestionSet", method = RequestMethod.GET)
     public JSONResult removeQuestionSet(String id){
-        JSONResult result = questionSetsService.deleteStudnet(id);
-        return result;
+        return questionSetsService.deleteStudnet(id);
     }
 }

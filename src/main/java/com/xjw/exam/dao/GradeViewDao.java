@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 成绩视图DAO层
+ * @author xiajingwei - S.H.Xjw@outlook.com
+ */
 @Repository
 public interface GradeViewDao {
     /**

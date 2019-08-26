@@ -50,7 +50,7 @@ public class JSONResult {
         this.status = status;
         this.msg = msg;
         this.data = data;
-        this.success = (status == 200)?true:false;
+        this.success = (status == 200?true:false);
     }
 
     // 构造函数
@@ -145,13 +145,11 @@ public class JSONResult {
             JsonNode jsonNode = MAPPER.readTree(jsonData);
             JsonNode data = jsonNode.get("data");
             Object obj = null;
-            if (clazz != null) {
                 if (data.isObject()) {
                     obj = MAPPER.readValue(data.traverse(), clazz);
                 } else if (data.isTextual()) {
                     obj = MAPPER.readValue(data.asText(), clazz);
                 }
-            }
             return build(jsonNode.get("status").intValue(), jsonNode.get("msg").asText(), obj);
         } catch (Exception e) {
             return null;

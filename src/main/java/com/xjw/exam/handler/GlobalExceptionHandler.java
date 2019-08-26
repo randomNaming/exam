@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
         if (isAjax(request)){
             return JSONResult.errorException(e.getMessage());
         }
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+        Map<String, Object> modelMap = new HashMap<>();
         modelMap.put("success",false);
         modelMap.put("url",request.getRequestURL());
         modelMap.put("errMsg", e.getMessage());
@@ -52,6 +52,6 @@ public class GlobalExceptionHandler {
      *
      */
     public static boolean isAjax(HttpServletRequest request){
-        return (request.getHeader("X-Requested-With") != null && "XMLHttpRequest".equals(request.getHeader("X-Requested-With").toString()));
+        return (request.getHeader("X-Requested-With") != null && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
     }
 }

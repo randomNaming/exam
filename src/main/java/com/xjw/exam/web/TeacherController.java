@@ -25,8 +25,8 @@ public class TeacherController {
      * @return 教师信息
      */
     @RequestMapping(value = "getTeacherById", method = RequestMethod.GET)
-    private Map<String, Object> getTeacherById(String id){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    public Map<String, Object> getTeacherById(String id){
+        Map<String, Object> modelMap = new HashMap<>();
         Teacher teacher = teacherService.getTeacherById(id);
         modelMap.put("teacher", teacher);
         return modelMap;
@@ -38,12 +38,11 @@ public class TeacherController {
      * @return success 0-重复 1-新用户
      */
     @RequestMapping(value = "checkById", method = RequestMethod.GET)
-    private Map<String, Object> checkById(String id){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    public Map<String, Object> checkById(String id){
+        Map<String, Object> modelMap = new HashMap<>();
         Teacher teacher = teacherService.getTeacherById(id);
         if (teacher != null){
             modelMap.put("success", 0);
-            // modelMap.put("teacher", teacher);
         }else{
             modelMap.put("success", 1);
             modelMap.put("teacher", teacher);
@@ -52,27 +51,12 @@ public class TeacherController {
     }
 
     /**
-     * 检查登录
-     * @param teacher
-     * @return
-     */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    private Map<String, Object> checkLogin(Teacher teacher){
-        System.out.println(teacher.getPassword());
-        Map<String, Object> modelMap = new HashMap<String, Object>();
-        Teacher tea = teacherService.checkTeacherLogin(teacher);
-        System.out.println(modelMap);
-        modelMap.put("data", tea);
-        return modelMap;
-    }
-
-    /**
      * 添加教师
      * @param teacher
      */
     @RequestMapping(value = "addTeacher", method = RequestMethod.POST)
-    private Map<String, Object> addTeacher(Teacher teacher){
-        Map<String, Object> modelMap = new HashMap<String, Object>();
+    public Map<String, Object> addTeacher(Teacher teacher){
+        Map<String, Object> modelMap = new HashMap<>();
         modelMap.put("success", teacherService.addTeacher(teacher));
         return modelMap;
     }

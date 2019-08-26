@@ -10,9 +10,7 @@ import com.xjw.exam.service.TeacherService;
 import com.xjw.exam.utils.JSONResult;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,11 +47,11 @@ public class UserAccessController {
      * @param request
      * @param response
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping(value = "/login")
     public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response){
 
 
-        Map<String, Object> logIn = new HashMap<String,Object>();
+        Map<String, Object> logIn = new HashMap<>();
 
         String level = request.getParameter("level");
         String id = request.getParameter("id");
@@ -100,7 +98,7 @@ public class UserAccessController {
          */
         LoginHistory loginRecord = new LoginHistory(id, level);
         int isNewRecord = loginHistoryService.count(loginRecord);
-        // accessLogger.info("isNewRecord = " + isNewRecord);
+        accessLogger.info("isNewRecord = " + isNewRecord);
         if(isNewRecord != 0){
             loginHistoryService.update(loginRecord);
         }else {
@@ -117,17 +115,16 @@ public class UserAccessController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    @PostMapping(value = "/logout")
     public Map<String, Object> logout(HttpServletRequest request, HttpServletResponse response){
 
 
-        Map<String, Object> logOut = new HashMap<String,Object>();
+        Map<String, Object> logOut = new HashMap<>();
 
 
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(1000*60*60);
         accessLogger.info("logout === id: " + session.getId());
-        // System.out.println(session.getAttribute("user").toString());
 
         if (session.getAttribute("user")!=null) {
             session.removeAttribute("user");
@@ -147,13 +144,12 @@ public class UserAccessController {
      * @param request
      * @return 用户信息
      */
-    @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
+    @GetMapping(value = "/getUserInfo")
     public JSONResult getUserInfo(HttpServletRequest request){
 
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
 
-        JSONResult userInfo = new JSONResult(200,"成功获取用户信息",user);
-        return userInfo;
+        return new JSONResult(200,"成功获取用户信息",user);
     }
 }

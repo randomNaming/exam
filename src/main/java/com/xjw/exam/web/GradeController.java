@@ -1,7 +1,5 @@
 package com.xjw.exam.web;
 
-import ch.qos.logback.classic.pattern.SyslogStartConverter;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.xjw.exam.entity.GradeView;
 import com.xjw.exam.entity.LoginHistory;
@@ -10,14 +8,12 @@ import com.xjw.exam.entity.TestHistory;
 import com.xjw.exam.service.GradeViewService;
 import com.xjw.exam.service.LoginHistoryService;
 import com.xjw.exam.service.TestHistoryService;
-import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,9 +48,9 @@ public class GradeController {
         paperDetail.put("count", questionCount);
 
         LoginHistory temp =loginHistoryService.findByUserId( student.getId());
-       // System.out.println("temp==" + temp.getLoginTime());
 
         Date loginTime = ( temp ).getLoginTime();
+        // TODO:转换问题
         System.out.println("temp==" + loginTime.toString());
         paperDetail.put("lastTime", loginTime.toString());
 

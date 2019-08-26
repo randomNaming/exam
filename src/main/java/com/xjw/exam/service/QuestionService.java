@@ -82,13 +82,10 @@ public class QuestionService {
         Matcher m=regx.matcher(tempStr);
         List<Integer> questionIdSet = new ArrayList<>();
         while (m.find()) {
-            String find = m.group(1).toString();
+            String find = m.group(1);
             // 加入集合
             questionIdSet.add(Integer.valueOf(find));
         }
-//        for (Integer s : questionIdSet) {
-//            System.out.println("--> " + s +"<---");
-//        }
         // 默认分页大小
         PageHelper.startPage(1,10);
         List<Question> list = questionDao.selectByIdSet(questionIdSet);
@@ -113,7 +110,7 @@ public class QuestionService {
         Matcher m=regx.matcher(tempStr);
         List<Integer> questionIdSet = new ArrayList<>();
         while (m.find()) {
-            String find = m.group(1).toString();
+            String find = m.group(1);
             // 加入集合
             questionIdSet.add(Integer.valueOf(find));
         }
@@ -174,16 +171,7 @@ public class QuestionService {
             judgeReturn.put("score", 0);
             judgeReturn.put("correct", false);
         }
-        /*
-         * 後期可能會刪除
-         */
-//        System.out.println("questionID == " + question.getId());
-//        Question temp = questionDao.get(question.getId());
-//        if(temp!=null){
-//            System.out.println("answer ===" + temp.getAnswer());
-//        }else {
-//            System.out.println("this is null");
-//        }
+
         judgeReturn.put("answer",(questionDao.get(question.getId())).getAnswer());
         testHistoryService.insert(testHistory);
         return new JSONResult(200,"處理成功！",judgeReturn);

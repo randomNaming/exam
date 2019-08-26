@@ -8,7 +8,6 @@ import com.xjw.exam.service.QuestionSetsService;
 import com.xjw.exam.service.TestHistoryService;
 import com.xjw.exam.utils.JSONResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 考试题目 Controller层
@@ -83,8 +80,7 @@ public class QuestionController {
             // 获取所有考试问卷
             return findPage(request, response);
         } else {
-            PageInfo<Question> QuestionSet = questionService.selectByIdSet(paperId);
-            return QuestionSet;
+            return questionService.selectByIdSet(paperId);
         }
     }
 
@@ -100,15 +96,13 @@ public class QuestionController {
         HttpSession teacherSession = request.getSession();
         question.setTeacherId(((Teacher)teacherSession.getAttribute("user")).getId());
 
-        JSONResult result = questionService.insert(question);
-        return result;
+        return questionService.insert(question);
     }
 
     @RequestMapping(value = "judge", method = RequestMethod.POST)
     public JSONResult judge(HttpServletRequest request, Question question){
         if (question.getAnswer() != null){
-            JSONResult result = questionService.judge(request, question);
-            return result;
+            return questionService.judge(request, question);
         }else{
             return JSONResult.errorMsg("請選擇答案回答問題");
         }

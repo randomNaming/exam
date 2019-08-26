@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 import java.beans.PropertyVetoException;
 
+/**
+ * c3p0连接池配置
+ * @author xiajingwei - S.H.xjw@outlook.com
+ * @date 2019-08-26
+ */
 @Configuration
 @MapperScan("com.xjw.exam.dao")
 public class DataSourceConfiguration {

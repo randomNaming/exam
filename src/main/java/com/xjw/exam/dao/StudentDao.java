@@ -3,8 +3,6 @@ package com.xjw.exam.dao;
 import com.xjw.exam.entity.Student;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * 学生DAO接口
  * @author SHXjw

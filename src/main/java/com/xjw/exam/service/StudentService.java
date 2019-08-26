@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 学生信息 service层
@@ -111,7 +109,6 @@ public class StudentService {
     }
 
     public Student checkStudentLogin(Student student) {
-        Student checkStudent = studentDao.checkStudentLogin(student);
-        return checkStudent;
+        return studentDao.checkStudentLogin(student);
     }
 }

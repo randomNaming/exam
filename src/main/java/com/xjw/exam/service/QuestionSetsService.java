@@ -32,8 +32,7 @@ public class QuestionSetsService {
 
         int result = questionSetsDao.delete(id);
         if(result > 0){
-            JSONResult jsonResult = new JSONResult(200,"删除成功!",result);
-            return jsonResult;
+            return new JSONResult(200,"删除成功!",result);
         }else {
             return JSONResult.errorMsg("删除失败");
         }

@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 教师信息 service层
  * @author xiajingwei - S.H.Xjw@outlook.com
@@ -25,8 +22,7 @@ public class TeacherService {
     }
 
     public Teacher checkTeacherLogin(Teacher teacher) {
-        Teacher checkTeacher = teacherDao.checkTeacherLogin(teacher);
-        return checkTeacher;
+        return teacherDao.checkTeacherLogin(teacher);
     }
 
     @Transactional
