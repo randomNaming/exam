@@ -27,8 +27,15 @@ import java.util.Map;
 @RestController
 public class UserAccessController {
 
-    public final static String LEVEL_STUDENT = "0"; // 学生权限
-    public final static String LEVEL_TEACHER = "1"; // 教师权限
+    /**
+     * 学生权限
+     */
+    public final static String LEVEL_STUDENT = "0";
+
+    /**
+     * 教师权限
+     */
+    public final static String LEVEL_TEACHER = "1";
 
     @Autowired
     private StudentService studentService;
@@ -51,7 +58,7 @@ public class UserAccessController {
     public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response){
 
 
-        Map<String, Object> logIn = new HashMap<>();
+        Map<String, Object> logIn = new HashMap<>(16);
 
         String level = request.getParameter("level");
         String id = request.getParameter("id");
@@ -119,15 +126,15 @@ public class UserAccessController {
     public Map<String, Object> logout(HttpServletRequest request, HttpServletResponse response){
 
 
-        Map<String, Object> logOut = new HashMap<>();
+        Map<String, Object> logOut = new HashMap<>(16);
 
 
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(1000*60*60);
         accessLogger.info("logout === id: " + session.getId());
-
-        if (session.getAttribute("user")!=null) {
-            session.removeAttribute("user");
+        String sessionKey = "user";
+        if (session.getAttribute(sessionKey)!=null) {
+            session.removeAttribute(sessionKey);
 
             logOut.put("msg", "用户已退出");
             logOut.put("success", true);
