@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 试题属性DAO接口
  * @author SHXjw
- * @version 20190910
+ * @version 20190810
  */
 @Repository
 public interface QuestionSetsDao extends CurdDao<QuestionSets> {
